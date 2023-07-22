@@ -29,7 +29,7 @@ const Home = () => {
             </p>
             <Link
               to="/harga"
-              className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-black text-white"
+              className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-sans font-semibold text-white"
             >
               Coba Gratis
             </Link>
@@ -52,7 +52,7 @@ const Home = () => {
             </p>
             <Link
               to="/harga"
-              className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-black text-white"
+              className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-sans font-semibold text-white"
             >
               Coba Gratis
             </Link>
@@ -61,7 +61,7 @@ const Home = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center p-24 bg-primary">
-        <p className="text-white text-lg font-medium px-4 py-2 rounded-full border-2 border-white">
+        <p className="text-white text-lg font-sans font-medium px-4 py-2 rounded-full border-2 border-white">
           PEACEFUL BEGINNING
         </p>
         <div className="flex flex-col relative">
