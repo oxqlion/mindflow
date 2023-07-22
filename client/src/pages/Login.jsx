@@ -18,7 +18,21 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
+  const [loginStatus, setLoginStatus] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [role, setRole] = useState(null);
+
+  Axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/login").then((response) => {
+      if (response.data.loggedIn == true) {
+        setRole(response.data.user[0].role);
+        console.log("ada role");
+      }
+    });
+  }),
+    [];
 
   const register = () => {
     console.log(usernameReg, passwordReg);
@@ -31,7 +45,7 @@ const Login = () => {
   };
 
   const login = () => {
-    console.log("login pressed")
+    console.log("login pressed");
     Axios.post("http://localhost:3000/login", {
       username: usernameReg,
       password: passwordReg,
@@ -39,9 +53,12 @@ const Login = () => {
       if (!response.data.message) {
         setLoginStatus(response.data.message);
       } else {
-        // setLoginStatus(response.data[0].message);
-        setLoginStatus("error: ", response.data);
-        console.log(response.data)
+        const text1 = "error: ";
+        const text2 = response.data.message;
+        const text = text1.concat(text2);
+        setLoggedIn(true);
+        setLoginStatus(text);
+        console.log(response.data);
       }
     });
   };
@@ -156,11 +173,17 @@ const Login = () => {
 
           <Link
             to="/register"
-            className="font-sans font-medium text-sm text-blue-400 w-full flex items-center justify-center hover:opacity-70"
+            className="font-sans font-medium text-sm text-blue-400 w-full flex items-center justify-center w-full hover:opacity-70"
           >
             Belum punya akun? Daftar sekarang!
           </Link>
-          <h1>{loginStatus}</h1>
+          {/* <h1
+            className={`${
+              loginStatus ? "flex" : "opacity-0"
+            }absolute top-24 left-0 w-full items-center justify-center bg-red-400 font-sans font-medium text-lg text-white rounded-sm p-4`}
+          >
+            {loginStatus}
+          </h1> */}
         </div>
       </div>
     </div>
