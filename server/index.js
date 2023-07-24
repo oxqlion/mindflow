@@ -37,23 +37,20 @@ app.listen(3000, () => {
 const saltRound = 10;
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "",
-  database: "mindflow",
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+
+  //   user: "root",
+  //   host: "localhost",
+  //   password: "",
+  //   database: "mindflow",
 });
 
-app.post("/register", (req, res) => {
+app.post("/api/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-
-  //   db.execute(
-  //     "INSERT INTO users (username, password) VALUES (?, ?)",
-  //     [username, password],
-  //     (err, result) => {
-  //       console.log(err);
-  //     }
-  //   );
 
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
@@ -69,7 +66,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.get("/login", (req, res) => {
+app.get("/api/login", (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
   } else {
@@ -77,28 +74,12 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
   console.log("username: ", username);
   console.log("password: ", password);
-
-  //   db.execute(
-  //     "SELECT * FROM users WHERE username = ? AND password = ?",
-  //     [username, password],
-  //     (err, result) => {
-  //       if (err) {
-  //         res.send({ err: err });
-  //       }
-  //       if (result.length > 0) {
-  //         res.send(result);
-  //       } else {
-  //         console.log(result);
-  //         res.send({ message: "Wrong username/password" });
-  //       }
-  //     }
-  //   );
 
   db.execute(
     "SELECT * FROM users WHERE username = ?;",
@@ -122,4 +103,15 @@ app.post("/login", (req, res) => {
       }
     }
   );
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).send({ message: "Error logging out" });
+    } else {
+      res.clearCookie("connect.sid");
+      res.send({ message: "Logged out successfully" });
+    }
+  });
 });
