@@ -41,14 +41,9 @@ const db = mysql.createConnection({
   host: process.env.DB_HOST,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-
-  //   user: "root",
-  //   host: "localhost",
-  //   password: "",
-  //   database: "mindflow",
 });
 
-app.post("/api/register", (req, res) => {
+app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -66,7 +61,7 @@ app.post("/api/register", (req, res) => {
   });
 });
 
-app.get("/api/login", (req, res) => {
+app.get("/login", (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
   } else {
@@ -74,7 +69,7 @@ app.get("/api/login", (req, res) => {
   }
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 

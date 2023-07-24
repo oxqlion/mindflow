@@ -13,8 +13,8 @@ import Cloud1 from "../assets/cloud.png";
 import Cloud2 from "../assets/cloud2.png";
 
 const Login = () => {
-  const [usernameReg, setUernameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
+//   const [usernameReg, setUernameReg] = useState("");
+//   const [passwordReg, setPasswordReg] = useState("");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/api/login").then((response) => {
+    Axios.get("http://localhost:3000/login").then((response) => {
       if (response.data.loggedIn == true) {
         // console.log(response.data.user[0].id);
         setUserId(response.data.user[0].id);
@@ -42,21 +42,21 @@ const Login = () => {
     });
   }, [userId]);
 
-  const register = () => {
-    console.log(usernameReg, passwordReg);
-    Axios.post("http://localhost:3000/api/register", {
-      username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response);
-    });
-  };
+//   const register = () => {
+//     console.log(usernameReg, passwordReg);
+//     Axios.post("http://localhost:3000/register", {
+//       username: usernameReg,
+//       password: passwordReg,
+//     }).then((response) => {
+//       console.log(response);
+//     });
+//   };
 
   const login = () => {
     console.log("login pressed");
-    Axios.post("http://localhost:3000/api/login", {
-      username: usernameReg,
-      password: passwordReg,
+    Axios.post("http://localhost:3000/login", {
+      username: username,
+      password: password,
     }).then((response) => {
       if (!response.data.message) {
         setLoginStatus(response.data.message);
@@ -120,7 +120,7 @@ const Login = () => {
             placeholder="Masukkan Email Anda"
             className="p-2 rounded-sm border-md w-full bg-gray-100 font-sans text-sm"
             onChange={(e) => {
-              setUernameReg(e.target.value);
+              setUsername(e.target.value);
             }}
           />
           <label htmlFor="password" className="font-sans text-sm">
@@ -132,7 +132,7 @@ const Login = () => {
             placeholder="Masukkan Password Anda"
             className="p-2 rounded-sm border-md w-full bg-gray-100 font-sans text-sm"
             onChange={(e) => {
-              setPasswordReg(e.target.value);
+              setPassword(e.target.value);
             }}
           />
           <div className="flex items-center justify-center gap-2">
