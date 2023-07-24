@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import Axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { BiLogoLinkedinSquare } from "react-icons/bi";
@@ -20,23 +21,30 @@ const Login = () => {
 
   const [loginStatus, setLoginStatus] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [role, setRole] = useState(null);
+  const [userId, setUserId] = useState(0);
+
+  const userLoggedIn = useAuth();
 
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/login").then((response) => {
+    Axios.get("http://localhost:3000/api/login").then((response) => {
       if (response.data.loggedIn == true) {
-        setRole(response.data.user[0].role);
-        console.log("ada role");
+        // console.log(response.data.user[0].id);
+        setUserId(response.data.user[0].id);
+        console.log("ada user");
+        console.log("User Id: ", userId);
+        if (userLoggedIn) {
+          console.log("redirecting ...");
+          return redirect("/");
+        }
       }
     });
-  }),
-    [];
+  }, [userId]);
 
   const register = () => {
     console.log(usernameReg, passwordReg);
-    Axios.post("http://localhost:3000/register", {
+    Axios.post("http://localhost:3000/api/register", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
@@ -46,19 +54,23 @@ const Login = () => {
 
   const login = () => {
     console.log("login pressed");
-    Axios.post("http://localhost:3000/login", {
+    Axios.post("http://localhost:3000/api/login", {
       username: usernameReg,
       password: passwordReg,
     }).then((response) => {
       if (!response.data.message) {
         setLoginStatus(response.data.message);
+        setLoggedIn(true);
+        console.log(response.data);
+        console.log("logged in. redirecting ...");
+        return redirect("/");
       } else {
         const text1 = "error: ";
         const text2 = response.data.message;
         const text = text1.concat(text2);
-        setLoggedIn(true);
+        console.log(text);
+        setLoggedIn(false);
         setLoginStatus(text);
-        console.log(response.data);
       }
     });
   };
