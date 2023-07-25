@@ -8,11 +8,12 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { BiSolidSpa } from "react-icons/bi";
 import { BiSolidCog } from "react-icons/bi";
 
-const Sidebar = () => {
+const Sidebar = ({ sendDashboard }) => {
   const [activeMenu, setActiveMenu] = useState("dashboard");
 
   const handleClick = (menu) => {
     setActiveMenu(menu);
+    sendDashboard(menu);
   };
 
   return (
