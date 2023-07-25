@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-const Navbar = () => {
+const Navbar = ({ userLoggedIn }) => {
   const user = useAuth();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     axios
@@ -34,7 +36,7 @@ const Navbar = () => {
         <Link className="hover:opacity-50 transition ease-in-out" to="/support">
           Support
         </Link>
-        {user ? (
+        {userLoggedIn ? (
           <Link
             to="/login"
             className="hover:opacity-50 transition ease-in-out bg-black px-6 py-2 ml-12 rounded-full font-sans font-semibold text-white"

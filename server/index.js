@@ -37,23 +37,30 @@ app.listen(3000, () => {
 const saltRound = 10;
 
 const db = mysql.createConnection({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  //   user: process.env.DB_USER,
+  //   host: process.env.DB_HOST,
+  //   password: process.env.DB_PASSWORD,
+  //   database: process.env.DB_NAME,
+
+  user: "root",
+  host: "localhost",
+  password: "",
+  database: "mindflow",
 });
 
 app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   bcrypt.hash(password, saltRound, (err, hash) => {
     if (err) {
       console.log("err: ", err);
     }
     db.execute(
-      "INSERT INTO users (username, password) VALUES (?,?)",
-      [username, hash],
+      "INSERT INTO users (username, password, first_name, last_name) VALUES (?,?,?,?)",
+      [username, hash, firstName, lastName],
       (err, result) => {
         console.log("err: ", err);
       }
@@ -63,8 +70,10 @@ app.post("/register", (req, res) => {
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
+    console.log(req.session.user);
     res.send({ loggedIn: true, user: req.session.user });
   } else {
+    console.log("gaada user brow")
     res.send({ loggedIn: false });
   }
 });
