@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import useAuth from "../hooks/useAuth";
 
@@ -13,8 +13,7 @@ import Cloud1 from "../assets/cloud.png";
 import Cloud2 from "../assets/cloud2.png";
 
 const Login = () => {
-//   const [usernameReg, setUernameReg] = useState("");
-//   const [passwordReg, setPasswordReg] = useState("");
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,51 +27,43 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/login").then((response) => {
-      if (response.data.loggedIn == true) {
-        // console.log(response.data.user[0].id);
-        setUserId(response.data.user[0].id);
-        console.log("ada user");
-        console.log("User Id: ", userId);
-        if (userLoggedIn) {
+    Axios.get("http://localhost:3000/login")
+      .then((response) => {
+        if (response.data.loggedIn) {
+          console.log(response.data.user.id);
+          setUserId(response.data.user.id);
+          console.log("ada user");
+          console.log("User Id: ", userId);
           console.log("redirecting ...");
-          return redirect("/");
+          return navigate("/");
         }
-      }
-    });
-  }, [userId]);
-
-//   const register = () => {
-//     console.log(usernameReg, passwordReg);
-//     Axios.post("http://localhost:3000/register", {
-//       username: usernameReg,
-//       password: passwordReg,
-//     }).then((response) => {
-//       console.log(response);
-//     });
-//   };
+      })
+      .catch((error) => console.log("error: ", error));
+  }, []);
 
   const login = () => {
     console.log("login pressed");
     Axios.post("http://localhost:3000/login", {
       username: username,
       password: password,
-    }).then((response) => {
-      if (!response.data.message) {
-        setLoginStatus(response.data.message);
-        setLoggedIn(true);
-        console.log(response.data);
-        console.log("logged in. redirecting ...");
-        return redirect("/");
-      } else {
-        const text1 = "error: ";
-        const text2 = response.data.message;
-        const text = text1.concat(text2);
-        console.log(text);
-        setLoggedIn(false);
-        setLoginStatus(text);
-      }
-    });
+    })
+      .then((response) => {
+        if (!response.data.message) {
+          setLoginStatus(response.data.message);
+          setLoggedIn(true);
+          console.log(response.data);
+          console.log("logged in. redirecting ...");
+          return redirect("/");
+        } else {
+          const text1 = "error: ";
+          const text2 = response.data.message;
+          const text = text1.concat(text2);
+          console.log(text);
+          setLoggedIn(false);
+          setLoginStatus(text);
+        }
+      })
+      .then(navigate("/"));
   };
 
   return (

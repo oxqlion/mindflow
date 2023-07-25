@@ -8,6 +8,7 @@ const useAuth = () => {
     const userIdCookie = Cookies.get("userId");
     if (userIdCookie) {
       setLoggedIn(true);
+      console.log("ada user brow");
     } else {
       setLoggedIn(false);
     }
