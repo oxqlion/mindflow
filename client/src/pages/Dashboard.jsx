@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
 import MainDashboard from "./dashboard/MainDashboard";
@@ -26,25 +27,27 @@ const Dashboard = () => {
         <div className="flex items-center justify-end p-4 gap-4 w-full shadow-md">
           <BiUser className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
           <BiSolidBell className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
-          <div className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer">
+          <Link to="/" className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer">
             <BiLogOut className="text-lg text-white mr-2" />
-            <p className="font-sans text-lg text-white">Keluar</p>
-          </div>
+            <Link to="/" className="font-sans text-lg text-white">Keluar</Link>
+          </Link>
         </div>
-        {(() => {
-            switch(dashboard) {
-                case 'dashboard':
-                    return <MainDashboard />
-                case 'journaling':
-                    return <Journaling />
-                case 'progress':
-                    return <Progress />
-                case 'meditation':
-                    return <Meditation />
-                case 'settings':
-                    return <Settings />
+        <div className="flex items-start justify-start w-full overflow-y-scroll">
+          {(() => {
+            switch (dashboard) {
+              case "dashboard":
+                return <MainDashboard />;
+              case "journaling":
+                return <Journaling />;
+              case "progress":
+                return <Progress />;
+              case "meditation":
+                return <Meditation />;
+              case "settings":
+                return <Settings />;
             }
-        })()}
+          })()}
+        </div>
       </div>
     </div>
   );
