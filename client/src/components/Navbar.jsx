@@ -38,7 +38,7 @@ const Navbar = ({ userLoggedIn }) => {
         </Link>
         {userLoggedIn ? (
           <Link
-            to="/login"
+            to="/"
             className="hover:opacity-50 transition ease-in-out bg-black px-6 py-2 ml-12 rounded-full font-sans font-semibold text-white"
             onClick={handleLogOut}
           >

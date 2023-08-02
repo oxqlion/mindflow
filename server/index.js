@@ -25,7 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24,
+      maxAge: 60 * 60 * 24,
     },
   })
 );
@@ -114,7 +114,7 @@ app.get("/logout", (req, res) => {
     if (err) {
       res.status(500).send({ message: "Error logging out" });
     } else {
-      res.clearCookie("connect.sid");
+      // res.clearCookie("connect.sid");
       res.send({ message: "Logged out successfully" });
     }
   });
