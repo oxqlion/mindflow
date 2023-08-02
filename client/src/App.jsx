@@ -21,7 +21,7 @@ function App() {
         console.log("redirecting ...");
       }
     });
-  }, [userLoggedIn]);
+  }, []);
 
   return (
     <Router>
@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Home userLoggedIn={userLoggedIn} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard/:id" element={<Dashboard />}/>
+        <Route path="/dashboard/:id" element={<Dashboard userLoggedIn={userLoggedIn} />}/>
       </Routes>
     </Router>
   );

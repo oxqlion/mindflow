@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
@@ -12,7 +12,7 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidBell } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 
-const Dashboard = () => {
+const Dashboard = ({ userLoggedIn }) => {
   const [dashboard, setDashboard] = useState("dashboard");
 
   const handleDashboard = (data) => {
