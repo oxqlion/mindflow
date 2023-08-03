@@ -4,7 +4,9 @@ import jwt from "jsonwebtoken";
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await Users.findAll();
+    const users = await Users.findAll({
+      attributes: ["id", "username", "email"],
+    });
     res.json(users);
   } catch (error) {
     console.log("Error: ", error);
@@ -28,15 +30,16 @@ export const Register = async (req, res) => {
   }
 };
 
-export const Login = async (req, res) => {
+export const Login = async(req, res) => {
   try {
     const user = await Users.findAll({
       where: {
         email: req.body.email,
       },
     });
+    console.log("User Login Email: ", user[0].email);
     const match = await bcrypt.compare(req.body.password, user[0].password);
-    if (!match) return res.status(404).json({ msg: "Wrong Password" });
+    if (!match) return res.status(400).json({ msg: "Wrong Password" });
     const userId = user[0].id;
     const pfp = user[0].pfp;
     const username = user[0].username;
@@ -66,6 +69,7 @@ export const Login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
+      secure: true,
     });
     res.json({ accessToken });
   } catch (error) {

@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import jwt_decoded from "jwt-decode";
+
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import HeaderText from "../assets/header_text.png";
@@ -15,10 +19,10 @@ import Ig from "../assets/ig.png";
 import Ln from "../assets/ln.png";
 import Tw from "../assets/tw.png";
 
-const Home = () => {
+const Home = ({ user }) => {
   return (
     <div className="flex flex-col w-full">
-      <Navbar />
+      <Navbar user={user} />
       <div className="flex flex-col w-full">
         <div className="flex items-center justify-center w-full bg-bg pt-24 pb-12">
           <div className="flex flex-col gap-4 w-1/2">
@@ -128,7 +132,9 @@ const Home = () => {
         </div>
       </div>
 
-      <p className="flex items-center justify-center w-full bg-bg pb-24">© Copyright 2023 Mindflow All Rights Reserved.</p>
+      <p className="flex items-center justify-center w-full bg-bg pb-24">
+        © Copyright 2023 Mindflow All Rights Reserved.
+      </p>
     </div>
   );
 };
