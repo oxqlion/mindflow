@@ -15,10 +15,10 @@ import Ig from "../assets/ig.png";
 import Ln from "../assets/ln.png";
 import Tw from "../assets/tw.png";
 
-const Home = ({ userLoggedIn }) => {
+const Home = () => {
   return (
     <div className="flex flex-col w-full">
-      <Navbar userLoggedIn={userLoggedIn} />
+      <Navbar />
       <div className="flex flex-col w-full">
         <div className="flex items-center justify-center w-full bg-bg pt-24 pb-12">
           <div className="flex flex-col gap-4 w-1/2">

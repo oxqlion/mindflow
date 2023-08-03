@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-const Navbar = ({ userLoggedIn }) => {
+const Navbar = () => {
+
+  const userLoggedIn = false;
+
   const user = useAuth();
   const navigate = useNavigate();
 

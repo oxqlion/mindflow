@@ -26,10 +26,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home userLoggedIn={userLoggedIn} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard/:id" element={<Dashboard userLoggedIn={userLoggedIn} />}/>
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
