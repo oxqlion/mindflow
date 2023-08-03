@@ -12,7 +12,8 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidBell } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 
-const Dashboard = ({ userLoggedIn }) => {
+const Dashboard = () => {
+
   const [dashboard, setDashboard] = useState("dashboard");
 
   const handleDashboard = (data) => {
@@ -27,9 +28,14 @@ const Dashboard = ({ userLoggedIn }) => {
         <div className="flex items-center justify-end p-4 gap-4 w-full shadow-md">
           <BiUser className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
           <BiSolidBell className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
-          <Link to="/" className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer">
+          <Link
+            to="/"
+            className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer"
+          >
             <BiLogOut className="text-lg text-white mr-2" />
-            <Link to="/" className="font-sans text-lg text-white">Keluar</Link>
+            <Link to="/" className="font-sans text-lg text-white">
+              Keluar
+            </Link>
           </Link>
         </div>
         <div className="flex items-start justify-start w-full overflow-y-scroll">

@@ -35,11 +35,11 @@ const Login = () => {
           console.log("ada user");
           console.log("User Id: ", userId);
           console.log("redirecting ...");
-          return navigate("/");
+          // return navigate("/");
         }
       })
       .catch((error) => console.log("error: ", error));
-  }, []);
+  });
 
   const login = () => {
     console.log("login pressed");
