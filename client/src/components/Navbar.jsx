@@ -30,7 +30,7 @@ const Navbar = () => {
         <Link className="hover:opacity-50 transition ease-in-out" to="/tentang">
           Tentang
         </Link>
-        <Link className="hover:opacity-50 transition ease-in-out" to="/dashboard/:id">
+        <Link className="hover:opacity-50 transition ease-in-out" to="/dashboard">
           Layanan
         </Link>
         <Link className="hover:opacity-50 transition ease-in-out" to="/harga">
