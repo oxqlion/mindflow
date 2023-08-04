@@ -65,6 +65,7 @@ const Register = () => {
           onChange={(e) => {
             setUsernameReg(e.target.value);
           }}
+          required
         />
         <label htmlFor="email" className="font-sans text-sm">
           E-mail
@@ -77,6 +78,7 @@ const Register = () => {
           onChange={(e) => {
             setEmailReg(e.target.value);
           }}
+          required
         />
         <label htmlFor="password" className="font-sans text-sm">
           Password
@@ -89,36 +91,8 @@ const Register = () => {
           onChange={(e) => {
             setPasswordReg(e.target.value);
           }}
+          required
         />
-        <div className="flex items-center justify-around w-full gap-4">
-          <div className="">
-            <label htmlFor="firstName" className="font-sans text-sm">
-              First Name
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              className="p-2 rounded-sm border-md  mt-2 w-full bg-gray-100 font-sans text-sm"
-              onChange={(e) => {
-                console.log(firstNameReg);
-                setFirstNameReg(e.target.value);
-              }}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="lastName" className="font-sans text-sm">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              className="p-2 rounded-sm border-md mt-2  w-full bg-gray-100 font-sans text-sm"
-              onChange={(e) => setLastNameReg(e.target.value)}
-            />
-          </div>
-        </div>
         <div className="flex items-center justify-center gap-2">
           <input type="checkbox" name="" className="cursor-pointer" />
           <p className="font-sans text-sm">Ingat Saya</p>
