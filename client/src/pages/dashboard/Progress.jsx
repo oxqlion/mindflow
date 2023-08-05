@@ -1,4 +1,3 @@
-import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -26,7 +25,6 @@ const Progress = () => {
        eventMinWidth={"100%"}
 
        />
-
     </div>
   );
 };

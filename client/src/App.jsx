@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -11,31 +12,35 @@ import Tentang from "./pages/Tentang";
 import Support from "./pages/Support";
 
 function App() {
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
-
-  axios.defaults.withCredentials = true;
+  const [user, setUser] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/login").then((response) => {
-      if (response.data.loggedIn) {
-        console.log(response.data.user.id);
-        setUserLoggedIn(true);
-        console.log("ada user di app");
-        console.log("redirecting ...");
-      }
-    });
-  }, [userLoggedIn]);
+    refreshToken();
+  }, []);
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/token");
+      const decoded = jwtDecode(response.data.accessToken);
+      setUser(decoded);
+      console.log("User: ", decoded);
+    } catch (error) {
+      console.log("Refresh token app js error: ", error);
+    }
+  };
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home userLoggedIn={userLoggedIn} />} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard/:id" element={<Dashboard />}/>
+        <Route path="/dashboard" element={<Dashboard user={user} />} />
         <Route path="/harga" element = {<Harga/>}/>
         <Route path="/tentang" element = {<Tentang/>}/>
         <Route path="/support" element = {<Support/>}/>
+
+        
       </Routes>
     </Router>
   );

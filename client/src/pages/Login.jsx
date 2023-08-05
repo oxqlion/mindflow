@@ -15,7 +15,7 @@ import Cloud2 from "../assets/cloud2.png";
 const Login = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [loginStatus, setLoginStatus] = useState(null);
@@ -26,25 +26,25 @@ const Login = () => {
 
   Axios.defaults.withCredentials = true;
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/login")
-      .then((response) => {
-        if (response.data.loggedIn) {
-          console.log(response.data.user.id);
-          setUserId(response.data.user.id);
-          console.log("ada user");
-          console.log("User Id: ", userId);
-          console.log("redirecting ...");
-          return navigate("/");
-        }
-      })
-      .catch((error) => console.log("error: ", error));
-  }, []);
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3000/login")
+  //     .then((response) => {
+  //       if (response.data.loggedIn) {
+  //         console.log(response.data.user.id);
+  //         setUserId(response.data.user.id);
+  //         console.log("ada user");
+  //         console.log("User Id: ", userId);
+  //         console.log("redirecting ...");
+  //         // return navigate("/");
+  //       }
+  //     })
+  //     .catch((error) => console.log("error: ", error));
+  // });
 
   const login = () => {
     console.log("login pressed");
     Axios.post("http://localhost:3000/login", {
-      username: username,
+      email: email,
       password: password,
     })
       .then((response) => {
@@ -53,7 +53,8 @@ const Login = () => {
           setLoggedIn(true);
           console.log(response.data);
           console.log("logged in. redirecting ...");
-          return redirect("/");
+          window.location.href = "/"
+          // return redirect("/");
         } else {
           const text1 = "error: ";
           const text2 = response.data.message;
@@ -111,7 +112,7 @@ const Login = () => {
             placeholder="Masukkan Email Anda"
             className="p-2 rounded-sm border-md w-full bg-gray-100 font-sans text-sm"
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
             }}
           />
           <label htmlFor="password" className="font-sans text-sm">

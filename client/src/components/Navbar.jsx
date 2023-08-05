@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-const Navbar = ({ userLoggedIn }) => {
-  const user = useAuth();
+const Navbar = ({ user }) => {
   const navigate = useNavigate();
+
+  const toLink = user ? "/dashboard" : "/login";
 
   const handleLogOut = () => {
     axios
-      .get("http://localhost:3000/logout")
+      .delete("http://localhost:3000/logout")
       .then((response) => {
         console.log(response.data.message);
       })
       .catch((error) => {
         console.log("Error logging out: ", error);
       });
+    window.location.href = "/";
   };
 
   return (
@@ -27,7 +29,7 @@ const Navbar = ({ userLoggedIn }) => {
         <Link className="hover:opacity-50 transition ease-in-out" to="/tentang">
           Tentang
         </Link>
-        <Link className="hover:opacity-50 transition ease-in-out" to="/dashboard/:id">
+        <Link className="hover:opacity-50 transition ease-in-out" to={toLink}>
           Layanan
         </Link>
         <Link className="hover:opacity-50 transition ease-in-out" to="/harga">
@@ -36,9 +38,9 @@ const Navbar = ({ userLoggedIn }) => {
         <Link className="hover:opacity-50 transition ease-in-out" to="/support">
           Support
         </Link>
-        {userLoggedIn ? (
+        {user ? (
           <Link
-            to="/login"
+            to="/"
             className="hover:opacity-50 transition ease-in-out bg-black px-6 py-2 ml-12 rounded-full font-sans font-semibold text-white"
             onClick={handleLogOut}
           >

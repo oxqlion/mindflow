@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
@@ -12,8 +12,9 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidBell } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
   const [dashboard, setDashboard] = useState("dashboard");
+  const [name, setName] = useState("");
 
   const handleDashboard = (data) => {
     setDashboard(data);
@@ -21,24 +22,29 @@ const Dashboard = () => {
 
   return (
     <div className="flex items-start justify-start w-full">
-      <Sidebar sendDashboard={handleDashboard} />
+      <Sidebar user={user} sendDashboard={handleDashboard} />
       {/* {dashboard && <p>Data from child: {dashboard}</p>} */}
       <div className="flex flex-col items-start justify-start w-full h-screen">
         <div className="flex items-center justify-end p-4 gap-4 w-full shadow-md">
           <BiUser className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
           <BiSolidBell className="text-xl text-primary hover:opacity-50 transition ease-in-out cursor-pointer" />
-          <Link to="/" className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer">
+          <Link
+            to="/"
+            className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer"
+          >
             <BiLogOut className="text-lg text-white mr-2" />
-            <Link to="/" className="font-sans text-lg text-white">Keluar</Link>
+            <div className="font-sans text-lg text-white">
+              Keluar
+            </div>
           </Link>
         </div>
-        <div className="flex items-start justify-start w-full overflow-y-scroll">
+        <div className="flex items-start justify-start w-full h-full overflow-y-scroll">
           {(() => {
             switch (dashboard) {
               case "dashboard":
-                return <MainDashboard />;
+                return <MainDashboard user={user} />;
               case "journaling":
-                return <Journaling />;
+                return <Journaling user={user} />;
               case "progress":
                 return <Progress />;
               case "meditation":
