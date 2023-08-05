@@ -13,39 +13,38 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [usernameReg, setUsernameReg] = useState("");
+  const [emailReg, setEmailReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
-  const [firstNameReg, setFirstNameReg] = useState("");
-  const [lastNameReg, setLastNameReg] = useState("");
-  const [userId, setUserId] = useState(0);
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/login").then((response) => {
-      if (response.data.loggedIn == true) {
-        console.log(response.data.user.id);
-        setUserId(response.data.user.id);
-        console.log("ada user");
-        console.log("User Id: ", userId);
-        if (userLoggedIn) {
-          console.log("redirecting ...");
-          return redirect("/");
-        }
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/login").then((response) => {
+  //     if (response.data.loggedIn == true) {
+  //       console.log(response.data.user.id);
+  //       setUserId(response.data.user.id);
+  //       console.log("ada user");
+  //       console.log("User Id: ", userId);
+  //       if (userLoggedIn) {
+  //         console.log("redirecting ...");
+  //         return redirect("/");
+  //       }
+  //     }
+  //   });
+  // }, []);
 
   const register = () => {
     console.log(usernameReg, passwordReg);
     axios
       .post("http://localhost:3000/register", {
+        pfp: "pfp",
         username: usernameReg,
+        email: emailReg,
         password: passwordReg,
-        firstName: firstNameReg,
-        lastName: lastNameReg,
       })
       .then((response) => {
         console.log(response);
-      })
-      .then(navigate("/"));
+      });
+    // .then(navigate("/"));
+    window.location.href = "/login";
   };
 
   return (
@@ -56,6 +55,19 @@ const Register = () => {
       <div className="flex flex-col items-start justify-start p-16 gap-4 bg-white w-1/2 h-full rounded-3xl">
         <h1 className="font-sans font-bold text-black text-3xl">Daftar</h1>
         <label htmlFor="email" className="font-sans text-sm">
+          Username
+        </label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Masukkan Email Anda"
+          className="p-2 rounded-sm border-md w-full bg-gray-100 font-sans text-sm"
+          onChange={(e) => {
+            setUsernameReg(e.target.value);
+          }}
+          required
+        />
+        <label htmlFor="email" className="font-sans text-sm">
           E-mail
         </label>
         <input
@@ -64,8 +76,9 @@ const Register = () => {
           placeholder="Masukkan Email Anda"
           className="p-2 rounded-sm border-md w-full bg-gray-100 font-sans text-sm"
           onChange={(e) => {
-            setUsernameReg(e.target.value);
+            setEmailReg(e.target.value);
           }}
+          required
         />
         <label htmlFor="password" className="font-sans text-sm">
           Password
@@ -78,36 +91,8 @@ const Register = () => {
           onChange={(e) => {
             setPasswordReg(e.target.value);
           }}
+          required
         />
-        <div className="flex items-center justify-around w-full gap-4">
-          <div className="">
-            <label htmlFor="firstName" className="font-sans text-sm">
-              First Name
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              className="p-2 rounded-sm border-md  mt-2 w-full bg-gray-100 font-sans text-sm"
-              onChange={(e) => {
-                console.log(firstNameReg);
-                setFirstNameReg(e.target.value);
-              }}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="lastName" className="font-sans text-sm">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              className="p-2 rounded-sm border-md mt-2  w-full bg-gray-100 font-sans text-sm"
-              onChange={(e) => setLastNameReg(e.target.value)}
-            />
-          </div>
-        </div>
         <div className="flex items-center justify-center gap-2">
           <input type="checkbox" name="" className="cursor-pointer" />
           <p className="font-sans text-sm">Ingat Saya</p>
