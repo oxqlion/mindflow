@@ -2,7 +2,7 @@ import Journals from "../models/JournalModel.js";
 import { Configuration, OpenAIApi } from "openai";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "",
 });
 
 const openai = new OpenAIApi(config);
