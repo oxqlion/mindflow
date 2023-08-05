@@ -125,7 +125,7 @@ const Journaling = ({ user }) => {
           <p className="font-sans font-normal text-gray-400 text-lg ml-20 mt-[10px]">
             {dateString}
           </p>
-          <img src={Reading} alt="Thumbnail" className="w-auto mt-8" />
+          <img src={Reading} alt="Thumbnail" className="w-[28em] ml-16 mt-8" />
         </div>
         <div className="flex flex-col w-full items-start justify-start ml-16">
           {content}

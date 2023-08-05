@@ -2,7 +2,7 @@ import Journals from "../models/JournalModel.js";
 import { Configuration, OpenAIApi } from "openai";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(config);
@@ -17,6 +17,10 @@ export const writeJournal = async (req, res) => {
         temperature: 0,
         max_tokens: 512,
     });
+    Journals.create({
+      user_id: userId,
+      journal: prompt,
+    })
     console.log("RESPONSE:", completion);
     res.json({ msg: completion.data.choices[0].text });
   } catch (error) {
