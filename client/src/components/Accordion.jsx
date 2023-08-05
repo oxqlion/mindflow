@@ -7,13 +7,13 @@ const Accordion = (props) =>{
         setItem({...item, active: newActive});
     };
     return(
-        <div className={`bg-[#e9e9e9] p-5 mb-5 border border-[#c6c6c655] rounded-md w-[280px] duration-500 group ${item.active === 1 ? 'is-active bg-white' : ''}`} >
+        <div className={`bg[#e9e9e9] px-5 py-5 mb-5 border border-[#c6c6c655] drop-shadow-lg hover:drop-shadow-2xl rounded-md w-[550px] duration-300 group ${item.active === 1 ? 'is-active bg-white' : ''}`} >
         <div className="flex items-center">
-            <div className="w-full duration-500 font-sans group-[.is-active]:font-bold">{item}</div>
-            <div className="text-xl rotate-90 duration-500 cursor-pointer font-sans group-[.is-active]:rotate-[270deg]" onClick={handletoggleActive}>+</div>
+            <div className="w-full duration-500 font-sans group-[.is-active]:font-bold">{item.question}</div>
+            <div className="text-xl rotate-90 duration-500 cursor-pointer font-sans group-[.is-active]:rotate-[230deg]" onClick={handletoggleActive}>+</div>
         </div>
-        <div className="overflow-hidden max-h-0 group-[.is-active]:max-h-[1330px] duration-500">
-        {item}
+        <div className="overflow-hidden font-sans font-regular max-h-0 group-[.is-active]:max-h-[1330px] duration-500">
+        {item.answer}
         </div>
     </div>
     )
