@@ -36,7 +36,7 @@ import Worried from "../../assets/emojis/worried.png";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const MainDashboard = () => {
+const MainDashboard = ({ user }) => {
   const percentage1 = 57;
   const percentage2 = 62;
   const percentage3 = 35;
@@ -79,7 +79,7 @@ const MainDashboard = () => {
     <div className="flex flex-col items-start justify-center w-full p-8 gap-4">
       <div className="flex flex-col w-full items-start justify-start">
         <p className="font-sans font-semibold text-black text-lg">
-          Hi, Alexandra!
+          Hi, {user.username}!
         </p>
         <h1 className="font-sans font-semibold text-black text-4xl">
           How are you today?
