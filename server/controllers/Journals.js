@@ -2,8 +2,8 @@ import Journals from "../models/JournalModel.js";
 import { Configuration, OpenAIApi } from "openai";
 
 const config = new Configuration({
-  organization: "org-eBTLJfPBX0B8JIErK6wSO83h",
-  apiKey: "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",
+  // organization: "org-eBTLJfPBX0B8JIErK6wSO83h",
+  // apiKey: "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",
 });
 
 const openai = new OpenAIApi(config);
