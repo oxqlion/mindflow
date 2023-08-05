@@ -18,14 +18,32 @@ import Sad from "../assets/emojis/sad.png";
 import Satisfied from "../assets/emojis/satisfied.png";
 import Stressed from "../assets/emojis/stressed.png";
 import Worried from "../assets/emojis/worried.png";
+import Loading from "../assets/loading.png";
 
 const UserJournal = ({ userSelect }) => {
   const [journal, setJournal] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const userSelectString = userSelect.join(", ");
 
-  const handleClick = () => {
+  const handleClick = async (req, res) => {
     console.log("prompt clicked");
+    console.log(journal);
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post("http://localhost:3000/submitJournal", {
+        userId: "your-user-id", // Replace with actual user ID
+        prompt: journal, // Assuming 'journal' contains the prompt you want to send
+        journalDate: "your-journal-date", // Replace with actual journal date
+      });
+      console.log("Response from backend : ", response.data.msg);
+    } catch (error) {
+      console.log("Error fetching di frontend : ", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
