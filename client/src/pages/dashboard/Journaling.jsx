@@ -1,4 +1,4 @@
-import EmojiCarousel from "../../components/emojiCarousel";
+import EmojiCarousel from "../../components/EmojiCarousel";
 import UserJournal from "../../components/UserJournal";
 
 import Reading from "../../assets/hero2.png";

@@ -35,7 +35,12 @@ function App() {
         <Route path="/" element={<Home user={user} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard/:id" element={<Dashboard />}/>
+        <Route path="/dashboard" element={<Dashboard user={user} />} />
+        <Route path="/harga" element = {<Harga/>}/>
+        <Route path="/tentang" element = {<Tentang/>}/>
+        <Route path="/support" element = {<Support/>}/>
+
+        
       </Routes>
     </Router>
   );

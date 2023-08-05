@@ -5,7 +5,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const Progress = () => {
   return (
-<<<<<<< HEAD
     <div className="flex w-full items-center justify-center">
       <FullCalendar 
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -26,15 +25,6 @@ const Progress = () => {
        eventMinWidth={"100%"}
 
        />
-
-=======
-    <div className="flex w-full h-full items-center justify-center">
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        height={500}
-      />
->>>>>>> f9ce97fd1737ad1d92934e197c29aa3d2800a8e9
     </div>
   );
 };
