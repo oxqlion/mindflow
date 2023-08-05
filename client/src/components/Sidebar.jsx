@@ -8,7 +8,7 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { BiSolidSpa } from "react-icons/bi";
 import { BiSolidCog } from "react-icons/bi";
 
-const Sidebar = ({ sendDashboard }) => {
+const Sidebar = ({ user, sendDashboard }) => {
   const [activeMenu, setActiveMenu] = useState("dashboard");
 
   const handleClick = (menu) => {
@@ -23,7 +23,7 @@ const Sidebar = ({ sendDashboard }) => {
           <BiUser className="text-3xl" />
         </div>
         <div className="flex flex-col items-center justify-center h-full">
-          <h1 className="font-sans font-bold text-black text-lg">Alexandra</h1>
+          <h1 className="font-sans font-bold text-black text-lg">{user.username}</h1>
           <p className="font-sans text-gray-500 text-sm">Basic Package</p>
         </div>
       </div>

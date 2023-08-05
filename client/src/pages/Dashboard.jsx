@@ -12,7 +12,7 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidBell } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
   const [dashboard, setDashboard] = useState("dashboard");
   const [name, setName] = useState("");
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex items-start justify-start w-full">
-      <Sidebar sendDashboard={handleDashboard} />
+      <Sidebar user={user} sendDashboard={handleDashboard} />
       {/* {dashboard && <p>Data from child: {dashboard}</p>} */}
       <div className="flex flex-col items-start justify-start w-full h-screen">
         <div className="flex items-center justify-end p-4 gap-4 w-full shadow-md">
@@ -38,13 +38,13 @@ const Dashboard = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-start justify-start w-full overflow-y-scroll">
+        <div className="flex items-start justify-start w-full h-full overflow-y-scroll">
           {(() => {
             switch (dashboard) {
               case "dashboard":
-                return <MainDashboard />;
+                return <MainDashboard user={user} />;
               case "journaling":
-                return <Journaling />;
+                return <Journaling user={user} />;
               case "progress":
                 return <Progress />;
               case "meditation":

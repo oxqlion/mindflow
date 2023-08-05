@@ -30,7 +30,7 @@ export const Register = async (req, res) => {
   }
 };
 
-export const Login = async(req, res) => {
+export const Login = async (req, res) => {
   try {
     const user = await Users.findAll({
       where: {
@@ -87,6 +87,7 @@ export const Logout = async (req, res) => {
     },
   });
   if (!user[0]) return res.sendStatus(204);
+  console.log("ada user di logout");
   const userId = user[0].id;
   await Users.update(
     { refresh_token: null },
