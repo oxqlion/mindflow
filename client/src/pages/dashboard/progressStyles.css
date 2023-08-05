@@ -1,0 +1,13 @@
+/* progressStyles.css */
+
+/* Example of custom styles for the calendar */
+.custom-calendar-header {
+    background-color: #000000;
+    color: white;
+  }
+  
+  .custom-event {
+    background-color: #f2d600;
+    border-color: #f2d600;
+  }
+  

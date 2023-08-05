@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/bootstrap5": "^6.1.8",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.1",
+    "bootstrap-icons": "^1.10.5",
     "chart.js": "^4.3.1",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
