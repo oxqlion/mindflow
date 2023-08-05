@@ -20,6 +20,7 @@ import Satisfied from "../../assets/emojis/satisfied.png";
 import Stressed from "../../assets/emojis/stressed.png";
 import Worried from "../../assets/emojis/worried.png";
 import { useState } from "react";
+import JournalResult from "../../components/JournalResult";
 
 const Journaling = ({ user }) => {
   const emojis = [
@@ -65,7 +66,17 @@ const Journaling = ({ user }) => {
     console.log(value);
   };
 
+  const updateValueFromChildComponent = (val) => {
+    setValue(val);
+  };
+
   let content;
+
+  const [resArr, setResArr] = useState([]);
+
+  const handleResArr = (data) => {
+    setResArr(data);
+  };
 
   switch (value) {
     case 1:
@@ -82,10 +93,16 @@ const Journaling = ({ user }) => {
       );
       break;
     case 2:
-      content = <UserJournal userSelect={userSelect} />;
+      content = (
+        <UserJournal
+          handleNext={updateValueFromChildComponent}
+          userSelect={userSelect}
+          handleResArr={handleResArr}
+        />
+      );
       break;
     case 3:
-      content = <div>Option 3 selected</div>;
+      content = <JournalResult resArr={resArr} userSelect={userSelect} />;
       break;
     default:
       content = <div>Default option</div>;
@@ -94,7 +111,7 @@ const Journaling = ({ user }) => {
 
   return (
     <div className="flex flex-col items-start justify-center w-full p-8 gap-4">
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-start justify-center">
         <div className="flex flex-col w-full items-start justify-start mt-19">
           <p className="font-sans font-medium text-black text-xl ml-20 mt-[10px]">
             Hello, {user.username}
@@ -108,12 +125,9 @@ const Journaling = ({ user }) => {
           <p className="font-sans font-normal text-gray-400 text-lg ml-20 mt-[10px]">
             {dateString}
           </p>
-          <img src={Reading} alt="Thumbnail" className="w-auto mt-8" />
+          <img src={Reading} alt="Thumbnail" className="w-[28em] ml-16 mt-8" />
         </div>
         <div className="flex flex-col w-full items-start justify-start ml-16">
-          <h1 className="font-sans font-bold text-primary text-4xl mb-8">
-            What's on your mind?
-          </h1>
           {content}
         </div>
       </div>

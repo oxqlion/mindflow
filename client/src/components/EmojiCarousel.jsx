@@ -45,7 +45,10 @@ const EmojiCarousel = ({ sendUserSelect }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full pr-24">
+    <div className="flex flex-col items-start justify-start w-full pr-24 mt-32">
+      <h1 className="font-sans font-bold text-primary text-4xl mb-8">
+        What's on your mind?
+      </h1>
       <div className="flex flex-wrap items-center justify-start h-[12em] gap-8 overflow-y-scroll">
         {emojis.map((emoji, index) => (
           <button

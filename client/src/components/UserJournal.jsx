@@ -20,34 +20,55 @@ import Stressed from "../assets/emojis/stressed.png";
 import Worried from "../assets/emojis/worried.png";
 import Loading from "../assets/loading.png";
 
-const UserJournal = ({ userSelect }) => {
+const UserJournal = ({ handleResArr, handleNext, userSelect }) => {
   const [journal, setJournal] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const userSelectString = userSelect.join(", ");
+  const newArray = userSelect.map((emoji) => emoji.name);
+  const userSelectString = newArray.join(" ");
 
   const handleClick = async (req, res) => {
     console.log("prompt clicked");
-    console.log(journal);
+    console.log(userSelectString);
 
     try {
       setLoading(true);
 
+      const template =
+        "I'm feeling " +
+        userSelectString +
+        ". " +
+        journal +
+        ". What do i need to do to increase my : 1. patience, 2. non-reactivity, 3. acceptance, 4. gratitude. give response for each one";
+
+      console.log(template);
+
       const response = await axios.post("http://localhost:3000/submitJournal", {
-        userId: "your-user-id", // Replace with actual user ID
-        prompt: journal, // Assuming 'journal' contains the prompt you want to send
-        journalDate: "your-journal-date", // Replace with actual journal date
+        userId: "your-user-id",
+        prompt: template,
+        journalDate: "your-journal-date",
       });
       console.log("Response from backend : ", response.data.msg);
+
+      const resFromBackend = response.data.msg;
+      const adviceArray = resFromBackend
+        .split(/\d+\./g)
+        .filter((item) => item.trim().length > 0);
+      console.log("Splitted string : ", adviceArray);
+      handleResArr(adviceArray);
     } catch (error) {
       console.log("Error fetching di frontend : ", error);
     } finally {
       setLoading(false);
+      handleNext(3);
     }
   };
 
   return (
-    <div>
+    <div className="relative">
+      <h1 className="font-sans font-bold text-primary text-4xl mb-8">
+        What's on your mind?
+      </h1>
       <div className="flex w-full gap-4 items-start justify-start">
         {userSelect.map((emoji, index) => (
           <div
@@ -90,6 +111,15 @@ const UserJournal = ({ userSelect }) => {
       >
         Next
       </button>
+      {loading ? (
+        <img
+          src={Loading}
+          alt=""
+          className="absolute top-0.5 left-[-50%] drop-shadow-2xl"
+        />
+      ) : (
+        <img src={Loading} alt="" className="hidden" />
+      )}
     </div>
   );
 };
