@@ -43,8 +43,40 @@ const MainDashboard = ({ user }) => {
   const [tasks, setTasks] = useState([]);
   const [subTasks, setSubTasks] = useState([]);
   const [task, setTask] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Patience");
   const [adaYangBerubah, setAdaYangBerubah] = useState(false);
+  const [progress, setProgress] = useState([]);
+
+  console.log(category);
+
+  useEffect(() => {
+    const getProgress = async () => {
+      try {
+        const response = await axios.post("http://localhost:3000/progress", {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        });
+        setProgress([
+          response.data.progress.patience_score,
+          response.data.progress.nonreactivity_score,
+          response.data.progress.acceptance_score,
+          response.data.progress.gratitude_score,
+          response.data.progress.total_score,
+        ]);
+        // console.log("Updated progress:", progress);
+        console.log("Setting progress finished. continuing...");
+      } catch (error) {
+        console.log("Error fetching progress in main dashboard : ", error);
+      }
+    };
+
+    getProgress();
+  }, [user]);
+
+  useEffect(() => {
+    console.log("Progress added");
+    console.log("Progress on main dashboard : ", progress);
+  }, [progress]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,11 +126,6 @@ const MainDashboard = ({ user }) => {
     return `${year}-${month}-${day}`;
   };
 
-  const percentage1 = 57;
-  const percentage2 = 62;
-  const percentage3 = 35;
-  const percentage4 = 58;
-
   const data = {
     labels: [11, 12, 13, 14, 15, 16, 17],
     datasets: [
@@ -131,16 +158,6 @@ const MainDashboard = ({ user }) => {
   ];
 
   const options = {};
-
-  // const [selectedCategory, setSelectedCategory] = useState("");
-
-  // const handleCategoryFilter = (category) => {
-  //   setSelectedCategory(category);
-  // };
-
-  // const filteredTasks = selectedCategory
-  //   ? tasks.filter((task) => task.includes(selectedCategory))
-  //   : tasks;
 
   useEffect(() => {
     console.log("task keganti :", task);
@@ -223,13 +240,37 @@ const MainDashboard = ({ user }) => {
 
   const handleFinishPatience = async (taskId) => {
     try {
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-patience",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+      const finish = allTask.data.task.length - (task.length - 1);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[0] = percentage;
+
       const response = await axios.patch(
         "http://localhost:3000/finish-patience",
         {
+          user_id: user.userId,
           taskId: taskId,
+          patienceScore: percentage,
+          // nonreactivityScore: "",
+          // acceptanceScore: "",
+          // gratitudeScore: "",
+          // totalScore: "",
+          date: getCurrentDate(),
         }
       );
       console.log("Patience finished successfully : ", response.data.msg);
+      console.log("patience all data : ", allTask.data.task.length);
+      console.log("patience data : ", task.length);
+      console.log("patiences : ", allTask.data.task);
+      console.log("patience data array: ", task);
+      console.log("patience finish : ", finish);
       setAdaYangBerubah(!adaYangBerubah);
       handleGetPatience();
     } catch (error) {
@@ -238,13 +279,38 @@ const MainDashboard = ({ user }) => {
   };
   const handleFinishGetNonReactivity = async (taskId) => {
     try {
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-non-reactivity",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length - 1);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[1] = percentage;
+
       const response = await axios.patch(
         "http://localhost:3000/finish-non-reactivity",
         {
+          user_id: user.userId,
           taskId: taskId,
+          // patienceScore: "",
+          nonreactivityScore: percentage,
+          // acceptanceScore: "",
+          // gratitudeScore: "",
+          // totalScore: "",
+          date: getCurrentDate(),
         }
       );
       console.log("Non Reactivity finished successfully : ", response.data.msg);
+      console.log("non reactivity all data : ", allTask.data.task.length);
+      console.log("non reactivity data : ", task.length);
+      console.log("non reactivities : ", allTask.data.task);
+      console.log("non reactivity data array: ", task);
+      console.log("non reactivity finish : ", finish);
       setAdaYangBerubah(!adaYangBerubah);
       handleGetNonReactivity();
     } catch (error) {
@@ -253,13 +319,38 @@ const MainDashboard = ({ user }) => {
   };
   const handleFinishAcceptance = async (taskId) => {
     try {
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-acceptance",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length - 1);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[2] = percentage;
+
       const response = await axios.patch(
         "http://localhost:3000/finish-acceptance",
         {
+          user_id: user.userId,
           taskId: taskId,
+          // patienceScore: "",
+          // nonreactivityScore: "",
+          acceptanceScore: percentage,
+          // gratitudeScore: "",
+          // totalScore: "",
+          date: getCurrentDate(),
         }
       );
       console.log("Acceptance finished successfully : ", response.data.msg);
+      console.log("acceptance all data : ", allTask.data.task.length);
+      console.log("acceptance data : ", task.length);
+      console.log("acceptances : ", allTask.data.task);
+      console.log("acceptance data array: ", task);
+      console.log("acceptance finish : ", finish);
       setAdaYangBerubah(!adaYangBerubah);
       handleGetAcceptance();
     } catch (error) {
@@ -268,13 +359,38 @@ const MainDashboard = ({ user }) => {
   };
   const handleFinishGratitude = async (taskId) => {
     try {
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-gratitude",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length - 1);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[3] = percentage;
+
       const response = await axios.patch(
         "http://localhost:3000/finish-gratitude",
         {
+          user_id: user.userId,
           taskId: taskId,
+          // patienceScore: "",
+          // nonreactivityScore: "",
+          // acceptanceScore: "",
+          gratitudeScore: percentage,
+          // totalScore: "",
+          date: getCurrentDate(),
         }
       );
       console.log("Gratitude finished successfully : ", response.data.msg);
+      console.log("gratitude all data : ", allTask.data.task.length);
+      console.log("gratitude data : ", task.length);
+      console.log("gratitudes : ", allTask.data.task);
+      console.log("gratitude data array: ", task);
+      console.log("gratitude finish : ", finish);
       setAdaYangBerubah(!adaYangBerubah);
       handleGetGratitude();
     } catch (error) {
@@ -337,7 +453,7 @@ const MainDashboard = ({ user }) => {
                 Gratitude
               </button>
             </div>
-            <div className="flex flex-col items-start justify-start p-4 w-full gap-4">
+            <div className="flex flex-col items-center p-4 w-full gap-4">
               {task.length > 0 ? (
                 <div className="">
                   {task.map((tugas, index) => (
@@ -384,54 +500,10 @@ const MainDashboard = ({ user }) => {
                   ))}
                 </div>
               ) : (
-                <p>No tasks found for the selected category.</p>
+                <p className="font-sans font-medium text-gray-400 mt-16">
+                  Select category to view tasks!
+                </p>
               )}
-              {/* <div className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6">
-                <div className="flex items-start justify-start p-2 bg-primary rounded-xl w-full">
-                  <div className="flex items-center justify-center p-2 bg-white rounded-full">
-                    <BiUser className="text-4xl text-black" />
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-full px-6">
-                    <h1 className="font-medium font-sans text-xl text-white">
-                      Mindfullness
-                    </h1>
-                    <h1 className="font-normal font-sans text-md text-white">
-                      Category: Mental | Time: 2h
-                    </h1>
-                    <p className="font-sans font-normal text-md text-white mt-8">
-                      Engaging in mindful movement practices like yoga or Tai
-                      Chi can help connect your body and mind while promoting
-                      relaxation.
-                    </p>
-                  </div>
-                  <div className="flex-items-start justify-start p-2">
-                    <img src={Mental} alt="thumbnail" className="w-48" />
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-start justify-start w-full h-full bg-white rounded-2xl p-6">
-                <div className="flex items-start justify-start p-2 bg-white rounded-xl w-full">
-                  <div className="flex items-center justify-center p-2 bg-white rounded-full">
-                    <BiUser className="text-4xl text-black" />
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-full px-6">
-                    <h1 className="font-medium font-sans text-xl text-primary">
-                      Mindfullness
-                    </h1>
-                    <h1 className="font-normal font-sans text-md text-primary">
-                      Category: Mental | Time: 2h
-                    </h1>
-                    <p className="font-sans font-medium text-md text-primary mt-8">
-                      Engaging in mindful movement practices like yoga or Tai
-                      Chi can help connect your body and mind while promoting
-                      relaxation.
-                    </p>
-                  </div>
-                  <div className="flex-items-start justify-start p-2">
-                    <img src={Mental} alt="thumbnail" className="w-48" />
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -446,16 +518,16 @@ const MainDashboard = ({ user }) => {
               <img src={Mind1} alt="" className="" />
               <div className="flex flex-col items-start justify-around gap-2">
                 <h1 className="font-sans font-semibold text-black text-lg">
-                  Meditation
+                  Patience
                 </h1>
                 <h1 className="font-sans font-normal text-black text-md">
-                  Meditation Session
+                  Patience Session
                 </h1>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
-                  value={percentage1}
-                  text={`${percentage1}%`}
+                  value={progress[0]}
+                  text={`${progress[0]}%`}
                   strokeWidth={11}
                   styles={buildStyles({
                     textColor: "purple",
@@ -468,16 +540,16 @@ const MainDashboard = ({ user }) => {
               <img src={Mind2} alt="" className="" />
               <div className="flex flex-col items-start justify-around gap-2">
                 <h1 className="font-sans font-semibold text-black text-lg">
-                  Meditation
+                  Non - Reactivity
                 </h1>
                 <h1 className="font-sans font-normal text-black text-md">
-                  Meditation Session
+                  Non - Reactivity Session
                 </h1>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
-                  value={percentage2}
-                  text={`${percentage2}%`}
+                  value={progress[1]}
+                  text={`${progress[1]}%`}
                   strokeWidth={11}
                   styles={buildStyles({
                     textColor: "orange",
@@ -490,16 +562,16 @@ const MainDashboard = ({ user }) => {
               <img src={Mind3} alt="" className="" />
               <div className="flex flex-col items-start justify-around gap-2">
                 <h1 className="font-sans font-semibold text-black text-lg">
-                  Meditation
+                  Acceptance
                 </h1>
                 <h1 className="font-sans font-normal text-black text-md">
-                  Meditation Session
+                  Acceptance Session
                 </h1>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
-                  value={percentage3}
-                  text={`${percentage3}%`}
+                  value={progress[2]}
+                  text={`${progress[2]}%`}
                   strokeWidth={11}
                   styles={buildStyles({
                     textColor: "blue",
@@ -512,16 +584,16 @@ const MainDashboard = ({ user }) => {
               <img src={Mind1} alt="" className="" />
               <div className="flex flex-col items-start justify-around gap-2">
                 <h1 className="font-sans font-semibold text-black text-lg">
-                  Meditation
+                  Gratitude
                 </h1>
                 <h1 className="font-sans font-normal text-black text-md">
-                  Meditation Session
+                  Gratitude Session
                 </h1>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
-                  value={percentage4}
-                  text={`${percentage4}%`}
+                  value={progress[3]}
+                  text={`${progress[3]}%`}
                   strokeWidth={11}
                   styles={buildStyles({
                     textColor: "purple",
