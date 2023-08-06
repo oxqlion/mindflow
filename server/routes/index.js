@@ -9,11 +9,16 @@ import {
   finishNonReactivity,
   finishPatience,
   getAcceptance,
+  getAllAcceptance,
+  getAllGratitude,
+  getAllNonReactivity,
+  getAllPatience,
   getGratitude,
   getNonReactivity,
   getPatience,
   getTask,
 } from "../controllers/Tasks.js";
+import { getProgress } from "../controllers/Progress.js";
 
 const router = express.Router();
 
@@ -30,8 +35,16 @@ router.post("/get-non-reactivity", getNonReactivity);
 router.post("/get-acceptance", getAcceptance);
 router.post("/get-gratitude", getGratitude);
 
+router.post("/get-all-patience", getAllPatience);
+router.post("/get-all-non-reactivity", getAllNonReactivity);
+router.post("/get-all-acceptance", getAllAcceptance);
+router.post("/get-all-gratitude", getAllGratitude);
+
 router.patch("/finish-patience", finishPatience);
 router.patch("/finish-non-reactivity", finishNonReactivity);
 router.patch("/finish-acceptance", finishAcceptance);
 router.patch("/finish-gratitude", finishGratitude);
+
+router.post("/progress", getProgress);
+
 export default router;

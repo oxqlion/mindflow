@@ -24,6 +24,14 @@ const UserJournal = ({ handleResArr, handleNext, userSelect, user }) => {
   const [journal, setJournal] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const newArray = userSelect.map((emoji) => emoji.name);
   const userSelectString = newArray.join(" ");
 
@@ -46,7 +54,7 @@ const UserJournal = ({ handleResArr, handleNext, userSelect, user }) => {
       const response = await axios.post("http://localhost:3000/submitJournal", {
         userId: user.userId,
         prompt: template,
-        journalDate: "",
+        date: getCurrentDate(),
       });
       console.log("Response from backend : ", response.data.msg);
 

@@ -7,8 +7,10 @@ import NonReactivity from "../models/NonReactivityModel.js";
 import Acceptance from "../models/AcceptanceModel.js";
 import Gratitude from "../models/GratitudeModel.js";
 
+import { Op } from "sequelize";
+
 const config = new Configuration({
-  apiKey: "",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(config);
@@ -22,6 +24,7 @@ export const writeJournal = async (req, res) => {
     acceptanceScore,
     gratitudeScore,
     totalScore,
+    date,
   } = req.body;
 
   try {
@@ -95,17 +98,19 @@ export const writeJournal = async (req, res) => {
     const existingProgress = await Progress.findOne({
       where: {
         user_id: userId,
-        date: result.date,
+        date: {
+          [Op.substring]: `${date}%`,
+        },
       },
     });
 
     if (existingProgress) {
-      existingProgress.patience_score = patienceScore;
-      existingProgress.nonreactivity_score = nonreactivityScore;
-      existingProgress.acceptance_score = acceptanceScore;
-      existingProgress.gratitude_score = gratitudeScore;
-      existingProgress.total_score = totalScore;
-      await existingProgress.save();
+      // existingProgress.patience_score = patienceScore;
+      // existingProgress.nonreactivity_score = nonreactivityScore;
+      // existingProgress.acceptance_score = acceptanceScore;
+      // existingProgress.gratitude_score = gratitudeScore;
+      // existingProgress.total_score = totalScore;
+      // await existingProgress.save();
       console.log("Progress updated successfully");
     } else {
       const newProgress = await Progress.create({
