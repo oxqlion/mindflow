@@ -8,7 +8,7 @@ import Acceptance from "../models/AcceptanceModel.js";
 import Gratitude from "../models/GratitudeModel.js";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "",
 });
 
 const openai = new OpenAIApi(config);
