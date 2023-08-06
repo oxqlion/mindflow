@@ -12,6 +12,7 @@ import Tentang from "./pages/Tentang";
 import Support from "./pages/Support";
 import Contact from "./pages/Contact";
 import Layanan from "./pages/Layanan";
+import Konsultasi from "./pages/Konsultasi"
 
 function App() {
   const [user, setUser] = useState("");
@@ -43,7 +44,7 @@ function App() {
         <Route path="/tentang" element = {<Tentang/>}/>
         <Route path="/support" element = {<Support/>}/>
         <Route path="/contact" element = {<Contact/>}/>
-        
+        <Route path="/konsultasi" element = {<Konsultasi/>}/>
       </Routes>
     </Router>
   );
