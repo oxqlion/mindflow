@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Harga from "./pages/Harga";
 import Tentang from "./pages/Tentang";
 import Support from "./pages/Support";
+import Contact from "./pages/Contact";
 
 function App() {
   const [user, setUser] = useState("");
@@ -39,7 +40,7 @@ function App() {
         <Route path="/harga" element = {<Harga/>}/>
         <Route path="/tentang" element = {<Tentang/>}/>
         <Route path="/support" element = {<Support/>}/>
-
+        <Route path="/contact" element = {<Contact/>}/>
         
       </Routes>
     </Router>

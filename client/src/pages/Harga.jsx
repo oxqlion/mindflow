@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer"
 import Certificate from "../assets/certificate.png";
 import Test from "../assets/contract.png";
 import Video from "../assets/multimedia.png";
@@ -17,19 +18,19 @@ import Tw from "../assets/tw.png";
 
 const Harga = () => {
   return (
-    <div className="flex flex-col w-full ">
+    <div className="flex flex-col w-full bg-slate-50   ">
       <Navbar />
       <div className="flex flex-col items-center justify-center bg-orange-100 w-full pt-20 pb-28">
-        <p className="font-sans font-bold text-black text-3xl">
+        <p className="font-sans font-bold text-amber-600 text-3xl">
           Layanan Mindflow
         </p>
-        <p className="font-sans font-medium text-gray-600 text-lg mt-[15px]">
+        <p className="font-sans font-medium text-gray-600 text-lg mt-[5px]">
           Temukan Layanan Mindflow yang sesuai untuk kamu.
         </p>
       </div>
       <div className="flex items-center justify-around gap-2 w-full  relative">
-        <div className="flex items-center justify-around gap-2 w-full absolute top-[-70px] px-[120px]">
-          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl">
+        <div className="flex items-center justify-around gap-2 w-full absolute top-[-50px] px-[120px]">
+          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl  pb-[40px] hover:drop-shadow-2xl">
             <p className="font-sans font-semibold text-black text-3xl mb-[15px]">
               Webinar
             </p>
@@ -108,7 +109,7 @@ const Harga = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl">
+          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl  pb-[40px] hover:drop-shadow-2xl">
             <p className="font-sans font-semibold text-black text-3xl mb-[15px]">
               Kelas Online
             </p>
@@ -185,7 +186,7 @@ const Harga = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl">
+          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl  pb-[40px] hover:drop-shadow-2xl">
             <p className="font-sans font-semibold text-black text-3xl mb-[15px]">
               Mentoring
             </p>
@@ -262,7 +263,7 @@ const Harga = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl">
+          <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl pb-[40px] hover:drop-shadow-2xl">
             <p className="font-sans font-semibold text-black text-3xl mb-[15px]">
               Konseling
             </p>
@@ -299,7 +300,7 @@ const Harga = () => {
                 </div>
               </div>
             </div>
-            <div className="flex w-full gap-2 mt-[20px]">
+            <div className="flex w-full gap-2 mt-[20px] ">
               <div className="flex rounded-full items-start justify-around gap-4">
                 <img src={Certificate} alt="Grup" className="w-6 h-6 drop-shadow-xl" />
                 <div className="flex flex-col w-48 items-start justify-start">
@@ -341,6 +342,10 @@ const Harga = () => {
           </div>
         </div>
       </div>
+      <div className="mt-[800px]">
+      <Footer />
+      </div>
+     
     </div>
   );
 };

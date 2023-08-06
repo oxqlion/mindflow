@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import Hero from "../assets/hero.png";
 import Navbar from "../components/Navbar";
 import Accordion from "../components/Accordion";
+import Footer from "../components/Footer"
+import Service from "../assets/support.png";
+import People from "../assets/People.png"
+
+
 
 const Support = () =>{
     const [list, setList] = useState([
@@ -33,21 +38,21 @@ const Support = () =>{
         },
     ])
     return(
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col bg-slate-50  ">
             <Navbar/>
-            <div  className="flex flex-col items-center justify-center bg-primary w-full pt-20 pb-20 rounded-bl-[140px]">
+            <div  className="flex flex-col items-center justify-center bg-primary w-full pt-10 pb-10 rounded-bl-[140px]">
                 <div className="flex flex-start w-full px-[200px]">
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col w-1/2 pt-10">
                     <p className=" flex flex-start font-sans font-bold text-amber-400 text-xl mt-[15px]">Welcome to the help page</p>
                     <p className=" flex flex-start font-sans font-bold text-white text-5xl mt-[15px]"> How can we assist you?</p>
                     </div>
                     <div></div>
                     <div className="flex flex-col ml-[280px] w-1/3">
-                     <img src={Hero} alt="" className="w-[180px] h-[180px]" />
+                     <img src={Service} alt="" className="w-[300px] h-[300px]" />
                      </div>
                 </div>
             </div>
-            <div className="flex flex-start mt-20 justify-center items-center" >
+            <div className="flex flex-start w-full px-[100px] mt-20 justify-around " >
             <div className="list flex flex-col ">
                 <p className="font-sans font-extrabold text-amber-600 text-2xl mb-10">Frequently Asked Questions by Other Users</p>
                 {/* begin item */}
@@ -58,11 +63,23 @@ const Support = () =>{
                 }
                  {/* end item */}
             </div>
-            <div className="flex flex-col ml-[280px] w-1/3">
-                     <img src={Hero} alt="" className="w-[180px] h-[180px]" />
+            <div className="flex flex-col">
+            <div className="flex flex-col ml-[100px] mt-10 w-[400px] ">
+                     <img src={People} alt="" className="w-[400px] h-[400px]" />
             </div>
+            <p className="ml-[100px] mt-10 font-sans font-bold text-2xl text-amber-500 ">Didn't find what you were <br /> looking for? </p>
+            <p className="ml-[100px] mt-5 font-sans font-bold text-xl text-gray-500">Feel free to send us a message, and we'll be happy to assist you.</p>
+            <Link className="transition ease-in-out font-sans font-semibold px-10 py-3 ml-[100px] text-center hover:bg-amber-400 mt-5 rounded-xl text-white hover:text-black bg-green-500  text-lg" to="/contact">
+             Send Message
+            </Link>
             </div>
            
+            
+           
+            </div>
+            <div className="mt-40">
+            <Footer/>
+            </div>
         </div>
     )
 }
