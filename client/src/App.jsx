@@ -11,6 +11,7 @@ import Harga from "./pages/Harga";
 import Tentang from "./pages/Tentang";
 import Support from "./pages/Support";
 import Contact from "./pages/Contact";
+import Layanan from "./pages/Layanan";
 
 function App() {
   const [user, setUser] = useState("");
@@ -37,6 +38,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard user={user} />} />
+        <Route path="/layanan" element = {<Layanan/>}/>
         <Route path="/harga" element = {<Harga/>}/>
         <Route path="/tentang" element = {<Tentang/>}/>
         <Route path="/support" element = {<Support/>}/>
