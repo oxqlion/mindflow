@@ -20,7 +20,7 @@ import Stressed from "../assets/emojis/stressed.png";
 import Worried from "../assets/emojis/worried.png";
 import Loading from "../assets/loading.png";
 
-const UserJournal = ({ handleResArr, handleNext, userSelect }) => {
+const UserJournal = ({ handleResArr, handleNext, userSelect, user }) => {
   const [journal, setJournal] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -44,9 +44,9 @@ const UserJournal = ({ handleResArr, handleNext, userSelect }) => {
       console.log(template);
 
       const response = await axios.post("http://localhost:3000/submitJournal", {
-        userId: "your-user-id",
+        userId: user.userId,
         prompt: template,
-        journalDate: "your-journal-date",
+        journalDate: "",
       });
       console.log("Response from backend : ", response.data.msg);
 

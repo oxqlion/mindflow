@@ -98,6 +98,7 @@ const Journaling = ({ user }) => {
           handleNext={updateValueFromChildComponent}
           userSelect={userSelect}
           handleResArr={handleResArr}
+          user={user}
         />
       );
       break;
