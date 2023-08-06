@@ -69,7 +69,7 @@ const Support = () =>{
             </div>
             <p className="ml-[100px] mt-10 font-sans font-bold text-2xl text-amber-500 ">Didn't find what you were <br /> looking for? </p>
             <p className="ml-[100px] mt-5 font-sans font-bold text-xl text-gray-500">Feel free to send us a message, and we'll be happy to assist you.</p>
-            <Link className="transition ease-in-out font-sans font-semibold px-10 py-3 ml-[100px] text-center hover:bg-amber-400 mt-5 rounded-xl text-white hover:text-black bg-green-500  text-lg" to="/contact">
+            <Link className="transition ease-in-out font-sans font-semibold px-10 py-3 ml-[100px] text-center hover:bg-amber-400 mt-5 rounded-xl text-white hover:text-black bg-black  text-lg" to="/contact">
              Send Message
             </Link>
             </div>

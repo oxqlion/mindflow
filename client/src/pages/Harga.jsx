@@ -18,7 +18,7 @@ import Tw from "../assets/tw.png";
 
 const Harga = () => {
   return (
-    <div className="flex flex-col w-full bg-slate-50   ">
+    <div className="flex flex-col w-full bg-slate-50 ">
       <Navbar />
       <div className="flex flex-col items-center justify-center bg-orange-100 w-full pt-20 pb-28">
         <p className="font-sans font-bold text-amber-600 text-3xl">

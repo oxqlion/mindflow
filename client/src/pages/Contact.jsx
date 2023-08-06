@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar"
 import Hero2 from "../assets/hero2.png"
 import Admin from "../assets/admin.png"
+import Footer from "../components/Footer"
 
 // npm i @emailjs/browser
 
@@ -53,7 +54,9 @@ const Contact = () => {
     </StyledContactForm>
             </div>
             </div>
-        
+            <div className="w-full">
+              <Footer/>
+            </div>
     </div>
   );
 };
@@ -107,7 +110,7 @@ const StyledContactForm = styled.div`
     input[type="submit"] {
       margin-top: 2rem;
       cursor: pointer;
-      background: #4F282A;
+      background: #000000;
       color: white;
       border: none;
       transition: background-color 0.2s ease-in-out;
