@@ -23,7 +23,7 @@ const Layanan = () => {
                 <div className="flex flex-col">
                 <p className="mt-20 font-sans font-bold text-6xl text-center text-white"> Consultation with Mentor</p>
                 <p className="mt-7 font-sans font-medium text-md text-center text-gray-200">Experiencing Anxiety Issues? Overthinking? Struggling to Manage <br /> Emotions & Haven't Discovered Self-Identity? Just consult with <br /> Mindflow!</p>
-                <Link className="transition ease-in-out font-sans font-semibold  px-10 ml-40  mr-40 pb-3 pt-3 text-center hover:bg-amber-400 mt-10  rounded-xl text-white hover:text-black bg-black  text-lg" to="/contact">
+                <Link className="transition ease-in-out font-sans font-semibold  px-10 ml-40  mr-40 pb-3 pt-3 text-center hover:bg-amber-400 mt-10  rounded-xl text-white hover:text-black bg-black  text-lg" to="/konsultasi">
                 Register for Mentoring
             </Link>
                 </div>
