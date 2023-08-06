@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BiUser } from "react-icons/bi";
 import Mental from "../../assets/mental.png";
 import Mind1 from "../../assets/mind1.png";
@@ -33,10 +34,38 @@ import Sad from "../../assets/emojis/sad.png";
 import Satisfied from "../../assets/emojis/satisfied.png";
 import Stressed from "../../assets/emojis/stressed.png";
 import Worried from "../../assets/emojis/worried.png";
+import { useEffect, useState } from "react";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDashboard = ({ user }) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("User ID, ", user.userId, ", Date :", getCurrentDate())
+        const response = await axios.post("http://localhost:3000/task", {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        });
+        console.log("get tasks main dashboard response : ", response.data.task);
+      } catch (error) {
+        console.log("Error di maindashboard get task : ", error);
+      }
+    };
+
+    fetchData();
+  }, [user]);
+
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const [tasks, setTasks] = useState([]);
+
   const percentage1 = 57;
   const percentage2 = 62;
   const percentage3 = 35;
@@ -97,7 +126,19 @@ const MainDashboard = ({ user }) => {
           </div>
           <div className="flex items-start justify-center w-full">
             <div className="flex flex-col items-start justify-center gap-2 w-1/3 p-2">
-              <div className="flex items-center justify-start gap-2">
+              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+                Patience
+              </button>
+              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+                Non-Reactivity
+              </button>
+              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+                Acceptance
+              </button>
+              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+                Gratitude
+              </button>
+              {/* <div className="flex items-center justify-start gap-2">
                 <input
                   type="checkbox"
                   name="Journaling"
@@ -154,7 +195,7 @@ const MainDashboard = ({ user }) => {
                 name=""
                 placeholder="Add yours here"
                 className="font-sans font-normal text-black p-2 rounded-md outline-none hover:bg-gray-100 transition ease-in-out cursor-pointer w-full"
-              />
+              /> */}
             </div>
             <div className="flex flex-col items-start justify-start p-4 w-full gap-4">
               <div className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6">
