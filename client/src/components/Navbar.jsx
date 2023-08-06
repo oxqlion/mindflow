@@ -26,16 +26,19 @@ const Navbar = ({ user }) => {
         Mindflow
       </Link>
       <div className="flex items-center justify-around p-2 w-50 gap-8">
-        <Link className="hover:opacity-50 transition ease-in-out" to="/tentang">
+      <Link className="hover:opacity-50 transition ease-in-out font-sans font-regular text-lg" to="/">
+          Home
+        </Link>
+        <Link className="hover:opacity-50 transition ease-in-out font-sans font-regular text-lg" to="/tentang">
           Tentang
         </Link>
-        <Link className="hover:opacity-50 transition ease-in-out" to={toLink}>
+        <Link className="hover:opacity-50 transition ease-in-out font-sans font-regular text-lg" to={toLink}>
           Layanan
         </Link>
-        <Link className="hover:opacity-50 transition ease-in-out" to="/harga">
+        <Link className="hover:opacity-50 transition ease-in-out font-sans font-regular text-lg" to="/harga">
           Harga
         </Link>
-        <Link className="hover:opacity-50 transition ease-in-out" to="/support">
+        <Link className="hover:opacity-50 transition ease-in-out font-sans font-regular text-lg" to="/support">
           Support
         </Link>
         {user ? (
