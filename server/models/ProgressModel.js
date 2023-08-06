@@ -15,6 +15,22 @@ const Progress = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    patience_score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nonreactivity_score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    acceptance_score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    gratitude_score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     total_score: {
       type: DataTypes.INTEGER,
       allowNull: false,

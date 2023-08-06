@@ -3,6 +3,7 @@ import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 import { writeJournal } from "../controllers/Journals.js";
+import { getTask } from "../controllers/Tasks.js";
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ router.post("/login", Login);
 router.get("/token", refreshToken);
 router.delete("/logout", Logout);
 router.post("/submitJournal", writeJournal);
+router.post("/task", getTask);
 
 export default router;
