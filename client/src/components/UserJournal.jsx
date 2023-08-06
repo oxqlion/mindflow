@@ -39,7 +39,7 @@ const UserJournal = ({ handleResArr, handleNext, userSelect, user }) => {
         userSelectString +
         ". " +
         journal +
-        ". What do i need to do to increase my : 1. patience, 2. non-reactivity, 3. acceptance, 4. gratitude. give response for each one";
+        ". What do i need to do to increase my : 1. Patience, 2. Non-Reactivity, 3. Acceptance, 4. Gratitude. give response for each one";
 
       console.log(template);
 

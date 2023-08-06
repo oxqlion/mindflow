@@ -39,15 +39,39 @@ import { useEffect, useState } from "react";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDashboard = ({ user }) => {
+  const [tasks, setTasks] = useState([]);
+  const [subTasks, setSubTasks] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("User ID, ", user.userId, ", Date :", getCurrentDate())
+        console.log("User ID, ", user.userId, ", Date :", getCurrentDate());
         const response = await axios.post("http://localhost:3000/task", {
           user_id: user.userId,
           date: getCurrentDate(),
         });
+        const data = response.data.task;
+        console.log("data : ", data);
         console.log("get tasks main dashboard response : ", response.data.task);
+        setSubTasks(data);
+        // setSubTasks(response.data.task);
+        // setTasks(response.data.task);
+        // console.log("subtasks : ", subTasks);
+        // console.log("tasks : ", tasks);
+        // const adviceArray = response.data.task[0].result
+        //   .split(/\d+\./g)
+        //   .filter((item) => item.trim().length > 0);
+        // console.log("Splitted string : ", adviceArray);
+        // subTasks.forEach((task) => {
+        //   const adviceArray = task.result
+        //     .split(/\d+\./g)
+        //     .filter((item) => item.trim().length > 0);
+        //   console.log("advice array dalem foreahc ni : ", adviceArray);
+        //   adviceArray.forEach((advice) => {
+        //     console.log("Ada berapa advice ya :", advice);
+        //     setTasks([...tasks, advice]);
+        //   });
+        // });
       } catch (error) {
         console.log("Error di maindashboard get task : ", error);
       }
@@ -56,6 +80,36 @@ const MainDashboard = ({ user }) => {
     fetchData();
   }, [user]);
 
+  // useEffect(() => {
+  //   console.log("Updated subTasks:", subTasks);
+  //   subTasks.map((task) => {
+  //     const adviceArray = task.result
+  //       .split(/\d+\./g)
+  //       .filter((item) => item.trim().length > 0);
+  //     console.log("ini advicedarray di dalem use effect subtask : ", adviceArray);
+  //   });
+  // }, [subTasks]);
+
+  useEffect(() => {
+    console.log("Updated subTasks:", subTasks);
+    const newTasks = subTasks.flatMap((task) => {
+      const adviceArray = task.result
+        .split(/\d+\./g)
+        .filter((item) => item.trim().length > 0);
+      console.log(
+        "ini advicedarray di dalem use effect subtask : ",
+        adviceArray
+      );
+      return adviceArray;
+    });
+
+    setTasks(newTasks);
+  }, [subTasks]);
+
+  useEffect(() => {
+    console.log("Ini semua tasknya : ", tasks);
+  }, [tasks]);
+
   const getCurrentDate = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -63,8 +117,6 @@ const MainDashboard = ({ user }) => {
     const day = String(currentDate.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-
-  const [tasks, setTasks] = useState([]);
 
   const percentage1 = 57;
   const percentage2 = 62;
@@ -104,6 +156,18 @@ const MainDashboard = ({ user }) => {
 
   const options = {};
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleCategoryFilter = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredTasks = selectedCategory
+    ? tasks.filter((task) =>
+        task.includes(selectedCategory)
+      )
+    : tasks;
+
   return (
     <div className="flex flex-col items-start justify-center w-full p-8 gap-4">
       <div className="flex flex-col w-full items-start justify-start">
@@ -126,16 +190,28 @@ const MainDashboard = ({ user }) => {
           </div>
           <div className="flex items-start justify-center w-full">
             <div className="flex flex-col items-start justify-center gap-2 w-1/3 p-2">
-              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+              <button
+                onClick={() => handleCategoryFilter("Patience")}
+                className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
+              >
                 Patience
               </button>
-              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+              <button
+                onClick={() => handleCategoryFilter("Non-reactivity")}
+                className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
+              >
                 Non-Reactivity
               </button>
-              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+              <button
+                onClick={() => handleCategoryFilter("Acceptance")}
+                className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
+              >
                 Acceptance
               </button>
-              <button className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium">
+              <button
+                onClick={() => handleCategoryFilter("Gratitude")}
+                className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
+              >
                 Gratitude
               </button>
               {/* <div className="flex items-center justify-start gap-2">
@@ -198,6 +274,15 @@ const MainDashboard = ({ user }) => {
               /> */}
             </div>
             <div className="flex flex-col items-start justify-start p-4 w-full gap-4">
+              {filteredTasks.length > 0 ? (
+                <ul>
+                  {filteredTasks.map((task, index) => (
+                    <li key={index}>{task}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No tasks found for the selected category.</p>
+              )}
               <div className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6">
                 <div className="flex items-start justify-start p-2 bg-primary rounded-xl w-full">
                   <div className="flex items-center justify-center p-2 bg-white rounded-full">
