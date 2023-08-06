@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BiUser } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 import Mental from "../../assets/mental.png";
 import Mind1 from "../../assets/mind1.png";
 import Mind2 from "../../assets/mind2.png";
@@ -41,6 +42,9 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const MainDashboard = ({ user }) => {
   const [tasks, setTasks] = useState([]);
   const [subTasks, setSubTasks] = useState([]);
+  const [task, setTask] = useState([]);
+  const [category, setCategory] = useState("");
+  const [adaYangBerubah, setAdaYangBerubah] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,24 +58,6 @@ const MainDashboard = ({ user }) => {
         console.log("data : ", data);
         console.log("get tasks main dashboard response : ", response.data.task);
         setSubTasks(data);
-        // setSubTasks(response.data.task);
-        // setTasks(response.data.task);
-        // console.log("subtasks : ", subTasks);
-        // console.log("tasks : ", tasks);
-        // const adviceArray = response.data.task[0].result
-        //   .split(/\d+\./g)
-        //   .filter((item) => item.trim().length > 0);
-        // console.log("Splitted string : ", adviceArray);
-        // subTasks.forEach((task) => {
-        //   const adviceArray = task.result
-        //     .split(/\d+\./g)
-        //     .filter((item) => item.trim().length > 0);
-        //   console.log("advice array dalem foreahc ni : ", adviceArray);
-        //   adviceArray.forEach((advice) => {
-        //     console.log("Ada berapa advice ya :", advice);
-        //     setTasks([...tasks, advice]);
-        //   });
-        // });
       } catch (error) {
         console.log("Error di maindashboard get task : ", error);
       }
@@ -79,16 +65,6 @@ const MainDashboard = ({ user }) => {
 
     fetchData();
   }, [user]);
-
-  // useEffect(() => {
-  //   console.log("Updated subTasks:", subTasks);
-  //   subTasks.map((task) => {
-  //     const adviceArray = task.result
-  //       .split(/\d+\./g)
-  //       .filter((item) => item.trim().length > 0);
-  //     console.log("ini advicedarray di dalem use effect subtask : ", adviceArray);
-  //   });
-  // }, [subTasks]);
 
   useEffect(() => {
     console.log("Updated subTasks:", subTasks);
@@ -156,17 +132,159 @@ const MainDashboard = ({ user }) => {
 
   const options = {};
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  // const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleCategoryFilter = (category) => {
-    setSelectedCategory(category);
+  // const handleCategoryFilter = (category) => {
+  //   setSelectedCategory(category);
+  // };
+
+  // const filteredTasks = selectedCategory
+  //   ? tasks.filter((task) => task.includes(selectedCategory))
+  //   : tasks;
+
+  useEffect(() => {
+    console.log("task keganti :", task);
+  }, [task]);
+
+  const handleGetPatience = async (req, res) => {
+    try {
+      const response = await axios.post("http://localhost:3000/get-patience", {
+        user_id: user.userId,
+        date: getCurrentDate(),
+      });
+      console.log(
+        "Retrieved Patience to Main Dashboard : ",
+        response.data.task
+      );
+      setTask(response.data.task);
+      setCategory("Patience");
+      console.log("Task is now : ", task);
+    } catch (error) {
+      console.log("Failed to fetch patience in Main Dashboard : ", error);
+    }
+  };
+  const handleGetNonReactivity = async (req, res) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/get-non-reactivity",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+      console.log(
+        "Retrieved Non Reactivity to Main Dashboard : ",
+        response.data.task
+      );
+      setTask(response.data.task);
+      setCategory("Non-Reactivity");
+      console.log("Task is now : ", task);
+    } catch (error) {
+      console.log("Failed to fetch non reactivity in Main Dashboard : ", error);
+    }
+  };
+  const handleGetAcceptance = async (req, res) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/get-acceptance",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+      console.log(
+        "Retrieved Acceptance to Main Dashboard : ",
+        response.data.task
+      );
+      setTask(response.data.task);
+      setCategory("Acceptance");
+      console.log("Task is now : ", task);
+    } catch (error) {
+      console.log("Failed to fetch acceptance in Main Dashboard : ", error);
+    }
+  };
+  const handleGetGratitude = async (req, res) => {
+    try {
+      const response = await axios.post("http://localhost:3000/get-gratitude", {
+        user_id: user.userId,
+        date: getCurrentDate(),
+      });
+      console.log(
+        "Retrieved Gratitude to Main Dashboard : ",
+        response.data.task
+      );
+      setTask(response.data.task);
+      setCategory("Gratitude");
+      console.log("Task is now : ", task);
+    } catch (error) {
+      console.log("Failed to fetch gratitude in Main Dashboard : ", error);
+    }
   };
 
-  const filteredTasks = selectedCategory
-    ? tasks.filter((task) =>
-        task.includes(selectedCategory)
-      )
-    : tasks;
+  const handleFinishPatience = async (taskId) => {
+    try {
+      const response = await axios.patch(
+        "http://localhost:3000/finish-patience",
+        {
+          taskId: taskId,
+        }
+      );
+      console.log("Patience finished successfully : ", response.data.msg);
+      setAdaYangBerubah(!adaYangBerubah);
+      handleGetPatience();
+    } catch (error) {
+      console.log("Error finishing patience in maind ashboard : ", error);
+    }
+  };
+  const handleFinishGetNonReactivity = async (taskId) => {
+    try {
+      const response = await axios.patch(
+        "http://localhost:3000/finish-non-reactivity",
+        {
+          taskId: taskId,
+        }
+      );
+      console.log("Non Reactivity finished successfully : ", response.data.msg);
+      setAdaYangBerubah(!adaYangBerubah);
+      handleGetNonReactivity();
+    } catch (error) {
+      console.log("Error finishing non reactivity in maind ashboard : ", error);
+    }
+  };
+  const handleFinishAcceptance = async (taskId) => {
+    try {
+      const response = await axios.patch(
+        "http://localhost:3000/finish-acceptance",
+        {
+          taskId: taskId,
+        }
+      );
+      console.log("Acceptance finished successfully : ", response.data.msg);
+      setAdaYangBerubah(!adaYangBerubah);
+      handleGetAcceptance();
+    } catch (error) {
+      console.log("Error finishing acceptance in maind ashboard : ", error);
+    }
+  };
+  const handleFinishGratitude = async (taskId) => {
+    try {
+      const response = await axios.patch(
+        "http://localhost:3000/finish-gratitude",
+        {
+          taskId: taskId,
+        }
+      );
+      console.log("Gratitude finished successfully : ", response.data.msg);
+      setAdaYangBerubah(!adaYangBerubah);
+      handleGetGratitude();
+    } catch (error) {
+      console.log("Error finishing gratitude in maind ashboard : ", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Ada yang berubah berubah");
+  }, [adaYangBerubah]);
 
   return (
     <div className="flex flex-col items-start justify-center w-full p-8 gap-4">
@@ -191,99 +309,84 @@ const MainDashboard = ({ user }) => {
           <div className="flex items-start justify-center w-full">
             <div className="flex flex-col items-start justify-center gap-2 w-1/3 p-2">
               <button
-                onClick={() => handleCategoryFilter("Patience")}
+                // onClick={() => handleCategoryFilter("Patience")}
+                onClick={handleGetPatience}
                 className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
               >
                 Patience
               </button>
               <button
-                onClick={() => handleCategoryFilter("Non-reactivity")}
+                // onClick={() => handleCategoryFilter("Non-reactivity")}
+                onClick={handleGetNonReactivity}
                 className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
               >
                 Non-Reactivity
               </button>
               <button
-                onClick={() => handleCategoryFilter("Acceptance")}
+                // onClick={() => handleCategoryFilter("Acceptance")}
+                onClick={handleGetAcceptance}
                 className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
               >
                 Acceptance
               </button>
               <button
-                onClick={() => handleCategoryFilter("Gratitude")}
+                // onClick={() => handleCategoryFilter("Gratitude")}
+                onClick={handleGetGratitude}
                 className="flex w-full hover:bg-gray-100 p-2 rounded-lg font-sans font-medium"
               >
                 Gratitude
               </button>
-              {/* <div className="flex items-center justify-start gap-2">
-                <input
-                  type="checkbox"
-                  name="Journaling"
-                  className="cursor-pointer"
-                />
-                <label
-                  htmlFor="Journaling"
-                  className="font-sans font-normal cursor-pointer"
-                >
-                  Journaling
-                </label>
-              </div>
-              <div className="flex items-center justify-start gap-2">
-                <input
-                  type="checkbox"
-                  name="Journaling"
-                  className="cursor-pointer"
-                />
-                <label
-                  htmlFor="Journaling"
-                  className="font-sans font-normal cursor-pointer"
-                >
-                  Meditation
-                </label>
-              </div>
-              <div className="flex items-center justify-start gap-2">
-                <input
-                  type="checkbox"
-                  name="Journaling"
-                  className="cursor-pointer"
-                />
-                <label
-                  htmlFor="Journaling"
-                  className="font-sans font-normal cursor-pointer"
-                >
-                  Take a walk
-                </label>
-              </div>
-              <div className="flex items-center justify-start gap-2">
-                <input
-                  type="checkbox"
-                  name="Journaling"
-                  className="cursor-pointer"
-                />
-                <label
-                  htmlFor="Journaling"
-                  className="font-sans font-normal cursor-pointer"
-                >
-                  Pray
-                </label>
-              </div>
-              <input
-                type="text"
-                name=""
-                placeholder="Add yours here"
-                className="font-sans font-normal text-black p-2 rounded-md outline-none hover:bg-gray-100 transition ease-in-out cursor-pointer w-full"
-              /> */}
             </div>
             <div className="flex flex-col items-start justify-start p-4 w-full gap-4">
-              {filteredTasks.length > 0 ? (
-                <ul>
-                  {filteredTasks.map((task, index) => (
-                    <li key={index}>{task}</li>
+              {task.length > 0 ? (
+                <div className="">
+                  {task.map((tugas, index) => (
+                    <div
+                      className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6 mb-4"
+                      key={index}
+                    >
+                      <div className="flex items-start justify-start p-2 bg-primary rounded-xl w-full h-full relative">
+                        <div className="flex items-center justify-center p-2 bg-white rounded-full">
+                          <BiUser className="text-4xl text-black" />
+                        </div>
+                        <div className="flex flex-col items-start justify-start w-full px-6">
+                          <h1 className="font-medium font-sans text-xl text-white">
+                            Mindfullness
+                          </h1>
+                          <h1 className="font-normal font-sans text-md text-white">
+                            Category: {category} | Time: 2h
+                          </h1>
+                          <p className="font-sans font-normal text-sm text-white mt-8">
+                            {tugas.task}
+                          </p>
+                        </div>
+                        <div className="flex flex-col items-end justify-end h-full p-2">
+                          <img src={Mental} alt="thumbnail" className="w-48" />
+                          <button
+                            onClick={() => {
+                              if (category === "Patience") {
+                                handleFinishPatience(tugas.id);
+                              } else if (category === "Non-Reactivity") {
+                                handleFinishGetNonReactivity(tugas.id);
+                              } else if (category === "Acceptance") {
+                                handleFinishAcceptance(tugas.id);
+                              } else if (category === "Gratitude") {
+                                handleFinishGratitude(tugas.id);
+                              }
+                            }}
+                            className="flex items-center justify-center bg-bg w-12 h-12 rounded-full absolute bottom-0 shadow-lg hover:bg-green-300 transition ease-in-out"
+                          >
+                            <BiCheck className="" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               ) : (
                 <p>No tasks found for the selected category.</p>
               )}
-              <div className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6">
+              {/* <div className="flex items-start justify-start w-full h-full bg-primary rounded-2xl p-6">
                 <div className="flex items-start justify-start p-2 bg-primary rounded-xl w-full">
                   <div className="flex items-center justify-center p-2 bg-white rounded-full">
                     <BiUser className="text-4xl text-black" />
@@ -328,7 +431,7 @@ const MainDashboard = ({ user }) => {
                     <img src={Mental} alt="thumbnail" className="w-48" />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
