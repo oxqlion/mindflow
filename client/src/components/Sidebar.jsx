@@ -9,7 +9,7 @@ import { BiSolidSpa } from "react-icons/bi";
 import { BiSolidCog } from "react-icons/bi";
 
 const Sidebar = ({ user, sendDashboard }) => {
-  const [activeMenu, setActiveMenu] = useState("dashboard");
+  const [activeMenu, setActiveMenu] = useState("journaling");
 
   const handleClick = (menu) => {
     setActiveMenu(menu);
@@ -22,7 +22,7 @@ const Sidebar = ({ user, sendDashboard }) => {
         <div className="flex items-center justify-center p-2 rounded-full outline">
           <BiUser className="text-3xl" />
         </div>
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-start justify-start h-full">
           <h1 className="font-sans font-bold text-black text-lg">{user.username}</h1>
           <p className="font-sans text-gray-500 text-sm">Basic Package</p>
         </div>

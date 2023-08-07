@@ -47,8 +47,6 @@ const MainDashboard = ({ user }) => {
   const [adaYangBerubah, setAdaYangBerubah] = useState(false);
   const [progress, setProgress] = useState([0, 0, 0, 0, 0]);
 
-  console.log(category);
-
   useEffect(() => {
     const getProgress = async () => {
       try {
@@ -78,45 +76,45 @@ const MainDashboard = ({ user }) => {
     console.log("Progress on main dashboard : ", progress);
   }, [progress]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("User ID, ", user.userId, ", Date :", getCurrentDate());
-        const response = await axios.post("http://localhost:3000/task", {
-          user_id: user.userId,
-          date: getCurrentDate(),
-        });
-        const data = response.data.task;
-        console.log("data : ", data);
-        console.log("get tasks main dashboard response : ", response.data.task);
-        setSubTasks(data);
-      } catch (error) {
-        console.log("Error di maindashboard get task : ", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       console.log("User ID, ", user.userId, ", Date :", getCurrentDate());
+  //       const response = await axios.post("http://localhost:3000/task", {
+  //         user_id: user.userId,
+  //         date: getCurrentDate(),
+  //       });
+  //       const data = response.data.task;
+  //       console.log("data : ", data);
+  //       console.log("get tasks main dashboard response : ", response.data.task);
+  //       setSubTasks(data);
+  //     } catch (error) {
+  //       console.log("Error di maindashboard get task : ", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [user]);
+  //   fetchData();
+  // }, [user]);
 
-  useEffect(() => {
-    console.log("Updated subTasks:", subTasks);
-    const newTasks = subTasks.flatMap((task) => {
-      const adviceArray = task.result
-        .split(/\d+\./g)
-        .filter((item) => item.trim().length > 0);
-      console.log(
-        "ini advicedarray di dalem use effect subtask : ",
-        adviceArray
-      );
-      return adviceArray;
-    });
+  // useEffect(() => {
+  //   console.log("Updated subTasks:", subTasks);
+  //   const newTasks = subTasks.flatMap((task) => {
+  //     const adviceArray = task.result
+  //       .split(/\d+\./g)
+  //       .filter((item) => item.trim().length > 0);
+  //     console.log(
+  //       "ini advicedarray di dalem use effect subtask : ",
+  //       adviceArray
+  //     );
+  //     return adviceArray;
+  //   });
 
-    setTasks(newTasks);
-  }, [subTasks]);
+  //   setTasks(newTasks);
+  // }, [subTasks]);
 
-  useEffect(() => {
-    console.log("Ini semua tasknya : ", tasks);
-  }, [tasks]);
+  // useEffect(() => {
+  //   console.log("Ini semua tasknya : ", tasks);
+  // }, [tasks]);
 
   const getCurrentDate = () => {
     const currentDate = new Date();
@@ -159,9 +157,9 @@ const MainDashboard = ({ user }) => {
 
   const options = {};
 
-  useEffect(() => {
-    console.log("task keganti :", task);
-  }, [task]);
+  // useEffect(() => {
+  //   console.log("task keganti :", task);
+  // }, [task]);
 
   const handleGetPatience = async (req, res) => {
     try {

@@ -10,7 +10,7 @@ import Gratitude from "../models/GratitudeModel.js";
 import { Op } from "sequelize";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(config);
@@ -105,12 +105,12 @@ export const writeJournal = async (req, res) => {
     });
 
     if (existingProgress) {
-      // existingProgress.patience_score = patienceScore;
-      // existingProgress.nonreactivity_score = nonreactivityScore;
-      // existingProgress.acceptance_score = acceptanceScore;
-      // existingProgress.gratitude_score = gratitudeScore;
-      // existingProgress.total_score = totalScore;
-      // await existingProgress.save();
+      existingProgress.patience_score = patienceScore;
+      existingProgress.nonreactivity_score = nonreactivityScore;
+      existingProgress.acceptance_score = acceptanceScore;
+      existingProgress.gratitude_score = gratitudeScore;
+      existingProgress.total_score = totalScore;
+      await existingProgress.save();
       console.log("Progress updated successfully");
     } else {
       const newProgress = await Progress.create({
@@ -132,5 +132,64 @@ export const writeJournal = async (req, res) => {
   } catch (error) {
     console.log("Nulis jurnal error di controller jurnal : ", error);
     return res.sendStatus(400);
+  }
+};
+
+export const getJournalByDate = async (req, res) => {
+  const { user_id, date } = req.body;
+  try {
+    const response = await Journals.findAll({
+      where: {
+        user_id: user_id,
+        date: {
+          [Op.substring]: `${date}%`,
+        },
+      },
+    });
+    res.json({ journal: response });
+  } catch (error) {
+    console.log(
+      "error getting journal by date in journals controller : ",
+      error
+    );
+    res.sendStatus(403);
+  }
+};
+
+export const getResultByJournalId = async (req, res) => {
+  const { user_id, date } = req.body;
+  try {
+    const response = await Journals.findAll({
+      where: {
+        user_id: user_id,
+        date: {
+          [Op.substring]: `${date}%`,
+        },
+      },
+    });
+    res.json({ journal: response });
+  } catch (error) {
+    console.log(
+      "error getting journal by date in journals controller : ",
+      error
+    );
+    res.sendStatus(403);
+  }
+};
+
+export const getUserJournal = async (req, res) => {
+  const { user_id } = req.body;
+
+  try {
+    const result = await Journals.findAll({
+      where: {
+        user_id: user_id,
+      },
+    });
+    console.log("User ID :", user_id, " Journals : ", result);
+    res.json({ journals: result });
+  } catch (error) {
+    console.log("error getting user journals : ", error);
+    res.sendStatus(403);
   }
 };

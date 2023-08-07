@@ -12,8 +12,10 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidBell } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 
+import axios from "axios";
+
 const Dashboard = ({ user }) => {
-  const [dashboard, setDashboard] = useState("dashboard");
+  const [dashboard, setDashboard] = useState("journaling");
   const [name, setName] = useState("");
 
   const handleDashboard = (data) => {
@@ -33,9 +35,7 @@ const Dashboard = ({ user }) => {
             className="flex items-center justify-center gap-2 py-2 px-4 bg-primary rounded md hover:opacity-50 transition ease-in-out cursor-pointer"
           >
             <BiLogOut className="text-lg text-white mr-2" />
-            <div className="font-sans text-lg text-white">
-              Keluar
-            </div>
+            <div className="font-sans text-lg text-white">Keluar</div>
           </Link>
         </div>
         <div className="flex items-start justify-start w-full h-full overflow-y-scroll">
@@ -46,7 +46,7 @@ const Dashboard = ({ user }) => {
               case "journaling":
                 return <Journaling user={user} />;
               case "progress":
-                return <Progress />;
+                return <Progress user={user} />;
               case "meditation":
                 return <Meditation />;
               case "settings":

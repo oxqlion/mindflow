@@ -2,7 +2,7 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import { writeJournal } from "../controllers/Journals.js";
+import { getUserJournal, writeJournal } from "../controllers/Journals.js";
 import {
   finishAcceptance,
   finishGratitude,
@@ -46,5 +46,7 @@ router.patch("/finish-acceptance", finishAcceptance);
 router.patch("/finish-gratitude", finishGratitude);
 
 router.post("/progress", getProgress);
+
+router.post("/user-journal", getUserJournal);
 
 export default router;
