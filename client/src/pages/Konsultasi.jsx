@@ -14,8 +14,8 @@ const Konsultasi = () => {
     const [userData, setUserData] = useState('');
     const [finalData, setFinalData] = useState([]);
     const steps = [
-        "Account Information",
         "Personal Details",
+        "Choose package",
         "Complete"
     ];
 
@@ -39,33 +39,37 @@ const handdleClick =(direction)=>{
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
 }
   return (
-    <div className="md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-white ">
-      <div className="container horizontal mt-5">
-        <Stepper
-        steps={steps}
-        currentStep={currentStep}
-         />
-
-         {/* display Components */}
-         <div className="my-10 p-10">
-            <StepperContext.Provider value={{ 
-                userData,
-                setUserData,
-                finalData,
-                setFinalData
-             }}>
-                {displayStep(currentStep)}
-            </StepperContext.Provider>
-         </div>
+    <div className="bg-bg w-full h-screen pt-20">
+             <div className="md:w-2/3 mx-auto mt-20 shadow-xl rounded-2xl pb-2 bg-white ">
         
-        {/* Navigation Control */}
+        <div className="container horizontal mt-5">
+          <Stepper
+          steps={steps}
+          currentStep={currentStep}
+           />
+  
+           {/* display Components */}
+           <div className=" p-10">
+              <StepperContext.Provider value={{ 
+                  userData,
+                  setUserData,
+                  finalData,
+                  setFinalData
+               }}>
+                  {displayStep(currentStep)}
+              </StepperContext.Provider>
+           </div>
+          
+          {/* Navigation Control */}
+        </div>
+        <StepperControl 
+        handleClick={handdleClick}
+        currentStep={currentStep}
+        steps={steps}
+        />
       </div>
-      <StepperControl 
-      handleClick={handdleClick}
-      currentStep={currentStep}
-      steps={steps}
-      />
-    </div>
+        </div>
+   
   );
 };
 
