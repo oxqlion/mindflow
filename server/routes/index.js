@@ -2,7 +2,11 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import { writeJournal } from "../controllers/Journals.js";
+import {
+  getResultById,
+  getUserJournal,
+  writeJournal,
+} from "../controllers/Journals.js";
 import {
   finishAcceptance,
   finishGratitude,
@@ -18,7 +22,7 @@ import {
   getPatience,
   getTask,
 } from "../controllers/Tasks.js";
-import { getProgress } from "../controllers/Progress.js";
+import { getAllProgress, getProgress } from "../controllers/Progress.js";
 
 const router = express.Router();
 
@@ -46,5 +50,9 @@ router.patch("/finish-acceptance", finishAcceptance);
 router.patch("/finish-gratitude", finishGratitude);
 
 router.post("/progress", getProgress);
+router.post("/all-progress", getAllProgress);
+
+router.post("/user-journal", getUserJournal);
+router.post("/result-by-journal-id", getResultById);
 
 export default router;

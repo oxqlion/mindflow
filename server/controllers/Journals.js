@@ -10,7 +10,7 @@ import Gratitude from "../models/GratitudeModel.js";
 import { Op } from "sequelize";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "",
 });
 
 const openai = new OpenAIApi(config);
@@ -132,5 +132,82 @@ export const writeJournal = async (req, res) => {
   } catch (error) {
     console.log("Nulis jurnal error di controller jurnal : ", error);
     return res.sendStatus(400);
+  }
+};
+
+export const getJournalByDate = async (req, res) => {
+  const { user_id, date } = req.body;
+  try {
+    const response = await Journals.findAll({
+      where: {
+        user_id: user_id,
+        date: {
+          [Op.substring]: `${date}%`,
+        },
+      },
+    });
+    res.json({ journal: response });
+  } catch (error) {
+    console.log(
+      "error getting journal by date in journals controller : ",
+      error
+    );
+    res.sendStatus(403);
+  }
+};
+
+export const getResultByJournalId = async (req, res) => {
+  const { user_id, date } = req.body;
+  try {
+    const response = await Journals.findAll({
+      where: {
+        user_id: user_id,
+        date: {
+          [Op.substring]: `${date}%`,
+        },
+      },
+    });
+    res.json({ journal: response });
+  } catch (error) {
+    console.log(
+      "error getting journal by date in journals controller : ",
+      error
+    );
+    res.sendStatus(403);
+  }
+};
+
+export const getUserJournal = async (req, res) => {
+  const { user_id } = req.body;
+
+  try {
+    const result = await Journals.findAll({
+      where: {
+        user_id: user_id,
+      },
+    });
+    console.log("User ID :", user_id, " Journals : ", result);
+    res.json({ journals: result });
+  } catch (error) {
+    console.log("error getting user journals : ", error);
+    res.sendStatus(403);
+  }
+};
+
+export const getResultById = async (req, res) => {
+  const { user_id, journal_id } = req.body;
+
+  try {
+    const result = await Results.findOne({
+      where: {
+        user_id: user_id,
+        journal_id: journal_id,
+      },
+    });
+    console.log("get all result by journal id di journals backend : ", result);
+    res.json({ result: result });
+  } catch (error) {
+    console.log("Error get result by journal id di journals backend : ", error);
+    res.sendStatus(403);
   }
 };
