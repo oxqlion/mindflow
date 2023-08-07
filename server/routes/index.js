@@ -2,7 +2,11 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import { getUserJournal, writeJournal } from "../controllers/Journals.js";
+import {
+  getResultById,
+  getUserJournal,
+  writeJournal,
+} from "../controllers/Journals.js";
 import {
   finishAcceptance,
   finishGratitude,
@@ -49,5 +53,6 @@ router.post("/progress", getProgress);
 router.post("/all-progress", getAllProgress);
 
 router.post("/user-journal", getUserJournal);
+router.post("/result-by-journal-id", getResultById);
 
 export default router;

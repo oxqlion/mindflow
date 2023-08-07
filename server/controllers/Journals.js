@@ -193,3 +193,21 @@ export const getUserJournal = async (req, res) => {
     res.sendStatus(403);
   }
 };
+
+export const getResultById = async (req, res) => {
+  const { user_id, journal_id } = req.body;
+
+  try {
+    const result = await Results.findOne({
+      where: {
+        user_id: user_id,
+        journal_id: journal_id,
+      },
+    });
+    console.log("get all result by journal id di journals backend : ", result);
+    res.json({ result: result });
+  } catch (error) {
+    console.log("Error get result by journal id di journals backend : ", error);
+    res.sendStatus(403);
+  }
+};
