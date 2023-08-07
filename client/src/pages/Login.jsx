@@ -64,7 +64,7 @@ const Login = () => {
           setLoginStatus(text);
         }
       })
-      .then(navigate("/"));
+      .then(navigate("/dashboard"));
   };
 
   return (

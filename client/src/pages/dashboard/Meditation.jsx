@@ -17,10 +17,10 @@ const Meditation = () => {
       setSong(song)
   }
   return (
-    <div>
+    <div className="flex flex-col w-full h-full">
       <Songs.Provider value={{ DataSongs, song, handleSetSong }}>
-      <NavbarMeditation/>
-        <div className="grid grid-cols-3 bg-slate-700 h-screen-navbar-player overflow-hidden">
+      {/* <NavbarMeditation/> */}
+        <div className="grid grid-cols-3  h-screen-navbar-player overflow-hidden">
           <DetailSong/>
           <ListSongs/>
         </div>
