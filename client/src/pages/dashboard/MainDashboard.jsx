@@ -39,13 +39,17 @@ import { useEffect, useState } from "react";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const MainDashboard = ({ user }) => {
+const MainDashboard = ({ user, sendDashboard }) => {
   const [tasks, setTasks] = useState([]);
   const [subTasks, setSubTasks] = useState([]);
   const [task, setTask] = useState([]);
   const [category, setCategory] = useState("Patience");
   const [adaYangBerubah, setAdaYangBerubah] = useState(false);
   const [progress, setProgress] = useState([0, 0, 0, 0, 0]);
+
+  const handleDashboard = (data) => {
+    sendDashboard(data);
+  };
 
   useEffect(() => {
     const getProgress = async () => {
@@ -662,7 +666,7 @@ const MainDashboard = ({ user }) => {
               </div>
             </div>
           </div>
-          <button className="w-full p-4 bg-black text-white font-sans font-medium text-md mt-8 rounded-xl hover:opacity-50 transition ease-in-out">
+          <button onClick={() => handleDashboard("journaling")} className="w-full p-4 bg-black text-white font-sans font-medium text-md mt-8 rounded-xl hover:opacity-50 transition ease-in-out">
             Discover More
           </button>
         </div>
@@ -677,9 +681,9 @@ const MainDashboard = ({ user }) => {
           <p className="font-sans font-normal text-gray-400 text-md w-1/2 text-center">
             Journal with a consistent happy mood!
           </p>
-          <button className="w-3/4 p-4 bg-black text-white font-sans font-medium text-sm mt-8 rounded-xl hover:opacity-50 transition ease-in-out">
+          {/* <button className="w-3/4 p-4 bg-black text-white font-sans font-medium text-sm mt-8 rounded-xl hover:opacity-50 transition ease-in-out">
             See Full Report
-          </button>
+          </button> */}
         </div>
         <div className="flex flex-col items-center justify-center w-1/3">
           <div className="flex flex-wrap items-center justify-start h-[160px] gap-2 overflow-y-scroll w-3/4">
@@ -692,7 +696,7 @@ const MainDashboard = ({ user }) => {
               </button>
             ))}
           </div>
-          <button className="w-3/4 p-4 bg-black text-white font-sans font-medium text-sm mt-4 rounded-xl hover:opacity-50 transition ease-in-out">
+          <button onClick={() => handleDashboard("journaling")} className="w-3/4 p-4 bg-black text-white font-sans font-medium text-sm mt-4 rounded-xl hover:opacity-50 transition ease-in-out">
             Report Your Journal Today
           </button>
         </div>

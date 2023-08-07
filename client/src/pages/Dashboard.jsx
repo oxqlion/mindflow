@@ -43,7 +43,7 @@ const Dashboard = ({ user }) => {
           {(() => {
             switch (dashboard) {
               case "dashboard":
-                return <MainDashboard user={user} />;
+                return <MainDashboard user={user} sendDashboard={handleDashboard} />;
               case "journaling":
                 return <Journaling user={user} />;
               case "progress":
