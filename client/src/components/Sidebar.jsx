@@ -103,25 +103,6 @@ const Sidebar = ({ user, sendDashboard }) => {
           Meditation
         </h1>
       </button>
-      <button
-        className={`flex items-center justify-start w-full p-4 mb-2 rounded-md hover:bg-gray-100 transition ease-in-out ${
-          activeMenu === "settings" ? "bg-primary" : "bg-white"
-        }`}
-        onClick={() => handleClick("settings")}
-      >
-        <BiSolidCog
-          className={`${
-            activeMenu === "settings" ? "text-white" : "text-black"
-          } text-2xl rounded-full mr-2`}
-        />
-        <h1
-          className={`font-sans font-medium text-lg ${
-            activeMenu === "settings" ? "text-white" : "text-black"
-          }`}
-        >
-          Settings
-        </h1>
-      </button>
     </div>
   );
 };
