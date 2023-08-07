@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AudioPlayer from 'react-h5-audio-player'
 import "react-h5-audio-player/lib/styles.css";
-import "../../src/meditation.css"
+import "../../src/Meditation.css"
 import { Songs } from '../Context';
 
 export default function Playing() {
