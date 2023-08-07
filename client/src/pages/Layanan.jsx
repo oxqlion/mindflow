@@ -32,7 +32,7 @@ const Layanan = () => {
 
              <div  className="flex px-[50px] justify-around bg-bg w-full h-[550px] relative">
                 <div className="flex flex-col mr-64">
-                    <p className="mt-40 font-sans font-bold text-5xl text-left text-amber-500 ">What's the purpose of <br />consulting with a mentor?</p>
+                    <p className="mt-40 font-sans font-bold text-5xl text-left text-primary ">What's the purpose of <br />consulting with a mentor?</p>
                     <ul className="list-disc mt-10 xl:list-disc">
                         <li><p className="font-sans font-semibold text-amber-900 text-xl">You can talk to a trained Mentor.</p></li>
                         <li><p className="font-sans font-semibold text-amber-900 text-xl">Together, find solutions to the issues you're facing.</p></li>
@@ -59,7 +59,7 @@ const Layanan = () => {
                 <div className="absolute bg-red-400 w-[100px] h-[100px] top-[300px] right-[150px] rounded-full "></div>
              </div>
 
-             <div  className="flex flex-col justify-content items-center bg-green-400 w-full h-[950px] relative">
+             <div  className="flex flex-col justify-content items-center bg-primary w-full h-[950px] relative">
            
                 <p className="text-center mt-40 font-sans font-semibold text-5xl text-white">Consultation Packages with Mentor</p>
                 

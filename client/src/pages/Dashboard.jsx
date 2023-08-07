@@ -15,6 +15,7 @@ import { BiLogOut } from "react-icons/bi";
 import axios from "axios";
 
 const Dashboard = ({ user }) => {
+
   const [dashboard, setDashboard] = useState("journaling");
   const [name, setName] = useState("");
 

@@ -16,11 +16,11 @@ const Footer = () => {
         <div>
         <div className="flex items-start justify-around py-20 px-30 bg-bg font-sans">
         <div className="flex flex-col gap-2">
-          <p className="mb-4 font-bold text-lg">Tentang Mindflow</p>
-          <p className="text-lg">Apa itu Mindflow?</p>
-          <p className="text-lg">Hubungi Kami</p>
-          <p className="text-lg">Syarat & ketentuan</p>
-          <p className="text-lg">Kebijakan Privasi</p>
+          <p className="mb-4 font-bold text-lg">About Mindflow</p>
+          <p className="text-lg">What is Mindflow?</p>
+          <p className="text-lg">Contact Us</p>
+          <p className="text-lg">Terms & Conditions</p>
+          <p className="text-lg">Privacy Policy</p>
         </div>
         <div className="flex flex-col gap-2">
           <p className="mb-4 font-bold text-lg">Customer Support</p>
@@ -34,11 +34,11 @@ const Footer = () => {
           </div>
           <div className="flex w-full">
             <img src={Time} alt="" className="w-8 mr-4" />
-            <p className="text-lg">Jam Kerja: (Senin-Jumat 9:00 - 17:00)</p>
+            <p className="text-lg">Working Hours: (Monday-Friday 9:00 AM - 5:00 PM)</p>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="mb-4 font-bold text-lg">Sosial Media</p>
+          <p className="mb-4 font-bold text-lg">Social Media</p>
           <div className="flex gap-4 mb-2">
             <img src={Fb} alt="" />
             <img src={Ig} alt="" />

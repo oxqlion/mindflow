@@ -29,14 +29,13 @@ const Home = ({ user }) => {
           <div className="flex flex-col gap-4 w-1/2">
             <img src={HeaderText} alt="" className="h-48 w-min" />
             <p className="w-2/3 text-2xl font-medium">
-              Untuk membantu kamu hidup sepenuhnya, kami berevolusi untuk
-              mengatasi berbagai permasalahan mental yang kamu alami
+            To assist you in living to the fullest, we have evolved to address various mental issues that you may experience.
             </p>
             <Link
               to="/harga"
               className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-sans font-semibold text-white"
             >
-              Coba Gratis
+              Try For Free
             </Link>
           </div>
           <div className="flex flex-col gap-4">
@@ -50,16 +49,13 @@ const Home = ({ user }) => {
             <h1 className="text-5xl font-bold">How can we</h1>
             <h1 className="text-5xl font-bold text-primary">Help You?</h1>
             <p className="w-3/4 text-xl font-medium">
-              Kami bekerja sama dengan ahli untuk membuat sebuah wadah mood
-              journaling yang efektif untuk membantu kalian yang sedang
-              mengalami permasalahan mental untuk semakin berkembang dan
-              mengskplor diri
+            We collaborate with experts to create an effective mood journaling container to help those of you experiencing mental challenges to further develop and explore yourselves."
             </p>
             <Link
               to="/harga"
               className="w-36 text-center hover:opacity-50 transition ease-in-out bg-black px-6 py-4 rounded-full font-sans font-semibold text-white"
             >
-              Coba Gratis
+              Try For Free
             </Link>
           </div>
         </div>
@@ -85,13 +81,12 @@ const Home = ({ user }) => {
       <div className="flex items-center justify-around p-24 w-full mt-24">
         <div className="flex flex-col gap-2 w-2/5">
           <p className="text-5xl">
-            Coba <span className="text-primary font-black">Mindflow</span>{" "}
-            sekarang juga untuk memulai{" "}
+            Try <span className="text-primary font-black">Mindflow</span>{" "}
+            now to start your peaceful journey.i{" "}
             <span className="text-black font-black">peaceful journey</span> mu
           </p>
           <p className="mt-4 text-xl">
-            Tunggu apa lagi? Segera coba journaling program kami dan
-            bergabunglah dengan jutaan pengguna yang telah menikmati manfaatnya.
+          What are you waiting for? Try our journaling program now and join millions of users who have already enjoyed its benefits
           </p>
         </div>
         <img src={Emoji} alt="" className="w-2/5" />

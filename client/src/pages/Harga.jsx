@@ -22,10 +22,10 @@ const Harga = () => {
       <Navbar />
       <div className="flex flex-col items-center justify-center bg-orange-100 w-full pt-20 pb-28">
         <p className="font-sans font-bold text-amber-600 text-3xl">
-          Layanan Mindflow
+        Mindflow services
         </p>
         <p className="font-sans font-medium text-gray-600 text-lg mt-[5px]">
-          Temukan Layanan Mindflow yang sesuai untuk kamu.
+        Discover the Mindflow services that suit you.
         </p>
       </div>
       <div className="flex items-center justify-around gap-2 w-full  relative">
@@ -35,13 +35,13 @@ const Harga = () => {
               Webinar
             </p>
             <p className="font-sans font-medium text-gray-600 text-xs text-center">
-              Kegiatan pembelajaran secara <br /> langsung melalui platform zoom{" "}
-              <br /> bersama mentor dan psikolog <br />
-              handal Mindflow
+            Live learning activities through  <br />  the Zoom platform with skilled {" "}
+              <br /> mentors and competent <br />
+              Mindflow psychologistsg 
             </p>
             <p className="font-sans font-medium text-amber-400 text-sm text-center mt-[20px]">
               {" "}
-              Mulai dari{" "}
+              Start From{" "}
             </p>
             <p className="font-sans font-medium text-black text-2xl text-center mt-[5px]">
               {" "}
@@ -49,7 +49,7 @@ const Harga = () => {
             </p>
             <div className="flex px-[20px] py-[4px] bg-amber-400 rounded-xl justify-center items-center mt-[30px]">
               <p className="font-sans font-semibold text-white text-md">
-                Daftar Sekarang
+                Register Now
               </p>
             </div>
             <p className="font-sans font-semibold text-black text-lg text-center my-[20px]">
@@ -61,10 +61,10 @@ const Harga = () => {
                 <img src={Group} alt="Grup" className="w-6 h-6 drop-shadow-xl" />
                 <div className="flex flex-col w-48 items-start justify-start">
                   <p className="font-sans font-medium text-black text-sm">
-                    Grup Komunitas Telegram
+                   Telegram Community Group
                   </p>
                   <p className="font-sans font-regular text-gray-400 text-xs mt-2">
-                  Berdiskusi dengan pembicara webinar, mentor, dan peserta webinar lainnya setelah webinar berlangsung
+                  Engage in discussions with webinar speakers, mentors, and other participants after the webinar has concluded.
                   </p>
                 </div>
               </div>
@@ -74,10 +74,10 @@ const Harga = () => {
                 <img src={Certificate} alt="Grup" className="w-6 h-6 drop-shadow-xl" />
                 <div className="flex flex-col w-48 items-start justify-start">
                   <p className="font-sans font-medium text-black text-sm">
-                    Sertifikat
+                    Certificate
                   </p>
                   <p className="font-sans font-regular text-gray-400 text-xs mt-2">
-                  Bukti keikutsertaan   
+                  Proof of Participation   
                   </p>
                 </div>
               </div>
@@ -87,10 +87,10 @@ const Harga = () => {
                 <img src={Test} alt="Grup" className="w-6 h-6 drop-shadow-xl" />
                 <div className="flex flex-col w-48 items-start justify-start">
                   <p className="font-sans font-medium text-black text-sm">
-                    Tes Psikologi
+                  Psychological Tests
                   </p>
                   <p className="font-sans font-regular text-gray-400 text-xs mt-2">
-                  Psikotes yang dapat membantumu mengenal diri.  
+                  Psychological tests that can help you know yourself better  
                   </p>
                 </div>
               </div>
@@ -100,10 +100,10 @@ const Harga = () => {
                 <img src={Discount} alt="Grup" className="w-6 h-6 drop-shadow-xl" />
                 <div className="flex flex-col w-48 items-start justify-start">
                   <p className="font-sans font-medium text-black text-sm">
-                    Diskon 60%
+                  60% Discount
                   </p>
                   <p className="font-sans font-regular text-gray-400 text-xs mt-2">
-                  Dapatkan diskon menarik ke layanan Satu Persen lainnya. 
+                  Get attractive discounts on other MindFlow services 
                   </p>
                 </div>
               </div>
@@ -111,7 +111,7 @@ const Harga = () => {
           </div>
           <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl  pb-[40px] hover:drop-shadow-2xl">
             <p className="font-sans font-semibold text-black text-3xl mb-[15px]">
-              Kelas Online
+              Online
             </p>
             <p className="font-sans font-medium text-gray-600 text-xs text-center">
             Kegiatan pembelajaran online <br /> bersama mentor dan psikolog <br />handal Satu Persen secara <br /> praktis dan fleksibel
