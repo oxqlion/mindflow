@@ -10,7 +10,7 @@ import Gratitude from "../models/GratitudeModel.js";
 import { Op } from "sequelize";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openai = new OpenAIApi(config);

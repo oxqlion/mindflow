@@ -45,7 +45,7 @@ const MainDashboard = ({ user }) => {
   const [task, setTask] = useState([]);
   const [category, setCategory] = useState("Patience");
   const [adaYangBerubah, setAdaYangBerubah] = useState(false);
-  const [progress, setProgress] = useState([]);
+  const [progress, setProgress] = useState([0, 0, 0, 0, 0]);
 
   console.log(category);
 
@@ -176,6 +176,18 @@ const MainDashboard = ({ user }) => {
       setTask(response.data.task);
       setCategory("Patience");
       console.log("Task is now : ", task);
+
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-patience",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+      const finish = allTask.data.task.length - (task.length);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[0] = percentage;
     } catch (error) {
       console.log("Failed to fetch patience in Main Dashboard : ", error);
     }
@@ -196,6 +208,19 @@ const MainDashboard = ({ user }) => {
       setTask(response.data.task);
       setCategory("Non-Reactivity");
       console.log("Task is now : ", task);
+
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-non-reactivity",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[1] = percentage;
     } catch (error) {
       console.log("Failed to fetch non reactivity in Main Dashboard : ", error);
     }
@@ -216,6 +241,19 @@ const MainDashboard = ({ user }) => {
       setTask(response.data.task);
       setCategory("Acceptance");
       console.log("Task is now : ", task);
+
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-acceptance",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[2] = percentage;
     } catch (error) {
       console.log("Failed to fetch acceptance in Main Dashboard : ", error);
     }
@@ -233,6 +271,19 @@ const MainDashboard = ({ user }) => {
       setTask(response.data.task);
       setCategory("Gratitude");
       console.log("Task is now : ", task);
+
+      const allTask = await axios.post(
+        "http://localhost:3000/get-all-gratitude",
+        {
+          user_id: user.userId,
+          date: getCurrentDate(),
+        }
+      );
+
+      const finish = allTask.data.task.length - (task.length);
+      const percentage = (finish * 100) / allTask.data.task.length;
+
+      progress[3] = percentage;
     } catch (error) {
       console.log("Failed to fetch gratitude in Main Dashboard : ", error);
     }
@@ -513,16 +564,18 @@ const MainDashboard = ({ user }) => {
               Meditation Progress
             </h1>
           </div>
-          <div className="flex flex-col items-center justify-center w-full gap-8">
-            <div className="flex items-center justify-around w-full">
-              <img src={Mind1} alt="" className="" />
-              <div className="flex flex-col items-start justify-around gap-2">
-                <h1 className="font-sans font-semibold text-black text-lg">
-                  Patience
-                </h1>
-                <h1 className="font-sans font-normal text-black text-md">
-                  Patience Session
-                </h1>
+          <div className="flex flex-col items-center justify-between w-full gap-8">
+            <div className="flex items-center justify-between w-full">
+              <div className="flex w-full items-center justify-start gap-2">
+                <img src={Mind1} alt="" className="" />
+                <div className="flex flex-col items-start justify-around gap-2">
+                  <h1 className="font-sans font-semibold text-black text-lg">
+                    Patience
+                  </h1>
+                  <h1 className="font-sans font-normal text-black text-md">
+                    Patience Session
+                  </h1>
+                </div>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
@@ -536,15 +589,17 @@ const MainDashboard = ({ user }) => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-around w-full">
-              <img src={Mind2} alt="" className="" />
-              <div className="flex flex-col items-start justify-around gap-2">
-                <h1 className="font-sans font-semibold text-black text-lg">
-                  Non - Reactivity
-                </h1>
-                <h1 className="font-sans font-normal text-black text-md">
-                  Non - Reactivity Session
-                </h1>
+            <div className="flex items-center justify-between w-full">
+              <div className="flex w-full items-center justify-start gap-2">
+                <img src={Mind2} alt="" className="" />
+                <div className="flex flex-col items-start justify-around gap-2">
+                  <h1 className="font-sans font-semibold text-black text-lg">
+                    Non-Reactivity
+                  </h1>
+                  <h1 className="font-sans font-normal text-black text-md">
+                    Non-Reactivity Session
+                  </h1>
+                </div>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
@@ -558,15 +613,17 @@ const MainDashboard = ({ user }) => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-around w-full">
-              <img src={Mind3} alt="" className="" />
-              <div className="flex flex-col items-start justify-around gap-2">
-                <h1 className="font-sans font-semibold text-black text-lg">
-                  Acceptance
-                </h1>
-                <h1 className="font-sans font-normal text-black text-md">
-                  Acceptance Session
-                </h1>
+            <div className="flex items-center justify-between w-full">
+              <div className="flex w-full items-center justify-start gap-2">
+                <img src={Mind3} alt="" className="" />
+                <div className="flex flex-col items-start justify-around gap-2">
+                  <h1 className="font-sans font-semibold text-black text-lg">
+                    Acceptance
+                  </h1>
+                  <h1 className="font-sans font-normal text-black text-md">
+                    Acceptance Session
+                  </h1>
+                </div>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
@@ -580,15 +637,17 @@ const MainDashboard = ({ user }) => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-around w-full">
-              <img src={Mind1} alt="" className="" />
-              <div className="flex flex-col items-start justify-around gap-2">
-                <h1 className="font-sans font-semibold text-black text-lg">
-                  Gratitude
-                </h1>
-                <h1 className="font-sans font-normal text-black text-md">
-                  Gratitude Session
-                </h1>
+            <div className="flex items-center justify-between w-full">
+              <div className="flex w-full items-center justify-start gap-2">
+                <img src={Mind1} alt="" className="" />
+                <div className="flex flex-col items-start justify-around gap-2">
+                  <h1 className="font-sans font-semibold text-black text-lg">
+                    Gratitude
+                  </h1>
+                  <h1 className="font-sans font-normal text-black text-md">
+                    Gratitude Session
+                  </h1>
+                </div>
               </div>
               <div className="flex items-center justify-center w-16 font-sans">
                 <CircularProgressbar
