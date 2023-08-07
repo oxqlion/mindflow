@@ -182,7 +182,7 @@ const MainDashboard = ({ user }) => {
           date: getCurrentDate(),
         }
       );
-      const finish = allTask.data.task.length - (task.length);
+      const finish = allTask.data.task.length - task.length;
       const percentage = (finish * 100) / allTask.data.task.length;
 
       progress[0] = percentage;
@@ -215,7 +215,7 @@ const MainDashboard = ({ user }) => {
         }
       );
 
-      const finish = allTask.data.task.length - (task.length);
+      const finish = allTask.data.task.length - task.length;
       const percentage = (finish * 100) / allTask.data.task.length;
 
       progress[1] = percentage;
@@ -248,7 +248,9 @@ const MainDashboard = ({ user }) => {
         }
       );
 
-      const finish = allTask.data.task.length - (task.length);
+      console.log("All task : ", allTask.data.task);
+
+      const finish = allTask.data.task.length - task.length;
       const percentage = (finish * 100) / allTask.data.task.length;
 
       progress[2] = percentage;
@@ -278,7 +280,7 @@ const MainDashboard = ({ user }) => {
         }
       );
 
-      const finish = allTask.data.task.length - (task.length);
+      const finish = allTask.data.task.length - task.length;
       const percentage = (finish * 100) / allTask.data.task.length;
 
       progress[3] = percentage;

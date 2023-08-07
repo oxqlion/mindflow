@@ -21,10 +21,13 @@ const Progress = ({ user }) => {
   useEffect(() => {
     const getAllJournal = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/progress", {
-          user_id: user.userId,
-          date: getCurrentDate(),
-        });
+        const response = await axios.post(
+          "http://localhost:3000/all-progress",
+          {
+            user_id: user.userId,
+            date: getCurrentDate(),
+          }
+        );
         setJournals(response.data.progress);
         console.log("harusnya udah jadi journal :", response.data.progress);
         // console.log("Journals is now : ", journals);
@@ -58,7 +61,7 @@ const Progress = ({ user }) => {
 
   return (
     <div className="flex w-full h-full items-start">
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="flex items-center justify-center w-2/5 h-auto p-12">
         <FullCalendar
           aspectRatio={1}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -72,12 +75,12 @@ const Progress = ({ user }) => {
       </div>
       <div className="flex flex-col w-full h-1/2 mt-4 overflow-y-scroll">
         {journals.map((item, index) => (
-          <div key={index}>
+          <div key={index} className="flex flex-col">
             <h1 className="px-4 py-2 rounded-lg bg-bg font-sans font-bold text-primary w-max">
               {item.date.split("T")[0]}
             </h1>
-            <div className="flex gap-4 p-2 w-full h-full items-center">
-              <span className="flex w-[5px] h-4/5 rounded-full items-center jsutify-center bg-primary text-primary">
+            <div className="flex gap-4 py-4 px-6 w-full h-full items-center">
+              <span className="flex w-[5px] h-full rounded-full items-center jsutify-center bg-primary text-primary">
                 .
               </span>
               <div className="flex flex-col gap-4">
@@ -87,10 +90,10 @@ const Progress = ({ user }) => {
                   )
                   .map((jdate, index) => (
                     <div
-                      className="flex flex-col items-end justify-start p-4 w-max bg-gray-100 rounded-lg font-medium font-sans text-sm text-gray-500"
+                      className="flex flex-col items-end justify-start p-4 w-full bg-gray-100 rounded-lg font-medium font-sans text-sm text-gray-500"
                       key={index}
                     >
-                      <p>{jdate.journal.split(":")[0].split(".")[1]}</p>
+                      <p>{jdate.journal.split(":")[0].split(".").slice(1)}</p>
                       <button className="mt-2 text-gray-400 font-normal hover:font-medium transition ease-in-out">
                         See more...
                       </button>

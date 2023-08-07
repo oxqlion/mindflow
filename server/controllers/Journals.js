@@ -10,7 +10,7 @@ import Gratitude from "../models/GratitudeModel.js";
 import { Op } from "sequelize";
 
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: "",
 });
 
 const openai = new OpenAIApi(config);
@@ -105,12 +105,12 @@ export const writeJournal = async (req, res) => {
     });
 
     if (existingProgress) {
-      existingProgress.patience_score = patienceScore;
-      existingProgress.nonreactivity_score = nonreactivityScore;
-      existingProgress.acceptance_score = acceptanceScore;
-      existingProgress.gratitude_score = gratitudeScore;
-      existingProgress.total_score = totalScore;
-      await existingProgress.save();
+      // existingProgress.patience_score = patienceScore;
+      // existingProgress.nonreactivity_score = nonreactivityScore;
+      // existingProgress.acceptance_score = acceptanceScore;
+      // existingProgress.gratitude_score = gratitudeScore;
+      // existingProgress.total_score = totalScore;
+      // await existingProgress.save();
       console.log("Progress updated successfully");
     } else {
       const newProgress = await Progress.create({
