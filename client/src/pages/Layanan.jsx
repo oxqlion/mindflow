@@ -59,9 +59,10 @@ const Layanan = () => {
                 <div className="absolute bg-red-400 w-[100px] h-[100px] top-[300px] right-[150px] rounded-full "></div>
              </div>
 
-             <div  className="flex flex-col justify-content items-center bg-slate-50 bg-green-400 w-full h-[950px] relative">
+             <div  className="flex flex-col justify-content items-center bg-green-400 w-full h-[950px] relative">
            
                 <p className="text-center mt-40 font-sans font-semibold text-5xl text-white">Consultation Packages with Mentor</p>
+                
                 <div className="flex items-center mt-20 justify-around gap-2 w-full px-[40px]">
 
                     <div className="flex flex-col bg-white pt-[20px] pl-[30px] pr-[30px] items-center rounded-md drop-shadow-xl  pb-[40px] hover:drop-shadow-2xl mb-40">
